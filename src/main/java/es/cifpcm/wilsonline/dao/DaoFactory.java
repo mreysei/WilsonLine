@@ -1,6 +1,10 @@
 package es.cifpcm.wilsonline.dao;
 
+import es.cifpcm.wilsonline.daoimpl.FlightDao;
+import es.cifpcm.wilsonline.daoimpl.GenericFlightDao;
+import es.cifpcm.wilsonline.daoimpl.ReservationsDao;
 import es.cifpcm.wilsonline.interfaces.ConnectionProvider;
+import es.cifpcm.wilsonline.interfaces.GenericDao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.naming.Context;
@@ -56,5 +60,20 @@ public class DaoFactory implements ConnectionProvider
             
             return null;
         }
+    }
+    
+    public GenericDao getGenericFlight()
+    {
+        return new GenericFlightDao(instance);
+    }
+    
+    public GenericDao getFlight()
+    {
+        return new FlightDao(instance);
+    }
+    
+    public GenericDao getReservations()
+    {
+        return new ReservationsDao(instance);
     }
 }

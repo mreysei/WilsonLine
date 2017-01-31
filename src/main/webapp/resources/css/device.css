@@ -1,0 +1,115 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 31-ene-2017, 17:14:04
+    Author     : maike
+*/
+
+@media screen and (max-width: 1000px) {
+    #container, 
+    #header .container, 
+    #footer .container {
+        width:100%;
+    }
+    #language{
+        float:none;
+        position:absolute;
+        right:0;
+    }
+    #header img {
+        margin-left:10px;
+    }
+}
+@media screen and (max-width: 900px) {
+    #left button{
+        float:none;
+        margin:0;
+    }
+    .gray {
+        display:flex;
+        flex-wrap: wrap;
+    }
+    .gray [for^="hour"],
+    .gray [id^="hour"]{
+        width:50%;
+    }
+    .gray [for$="Out"]{
+        order:1;
+    }
+    .gray [id$="Out"]{
+        order:3;
+        border-right:1px solid #eee;
+    }
+    .gray [for$="In"]{
+        order:2;
+    }
+    .gray [id$="In"]{
+        order:4;
+    }
+}
+@media screen and (max-width: 700px) {
+    #container #left, 
+    #container #right{
+        width:100%;
+        border:none;
+    }
+    #container #left {
+        background-color:#005C84;
+        color:white;
+        border-bottom: 1px solid #eee;
+        transition: background-colo .5s, color .5s;
+    }
+    #container #left.active{
+        background-color:white;
+        color:#333;
+    }
+    #container #left.active h1{
+        font-size: 32px;
+    }
+    #container #left h1{
+        border:none;
+        margin:0;
+        font-size:20px;
+        transition: font-size .5s;
+    }
+    #container #left h1:after {
+        content: "\25B2";
+        margin-left:7.5px;
+        display:inline-block;
+        transition:transform .5s;
+        float:right;
+    }
+    #container #left.active h1:after{
+        transform: rotate(180deg);
+    }
+    #container #left form{
+        display:none;
+    }
+    #footer .container{
+        flex-wrap: wrap;
+    }
+    #footer .members,
+    #footer .links {
+        width:100%;
+        border:none;
+    }
+    #footer .members{
+        border-bottom:1px dashed rgba(255,255,255,0.2);
+    }
+}
+@media screen and (max-width: 600px) {
+    #container #bg {
+        height:200px;
+    }
+    #header img {
+        width: 160px;
+    }
+}
+@media screen and (max-width: 500px) {
+    #container #bg {
+        height:100px;
+    }
+}

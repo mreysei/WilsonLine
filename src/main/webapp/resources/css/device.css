@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : maike
 */
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1020px) {
     #container, 
     #header .container, 
     #footer .container {
@@ -98,6 +98,20 @@ and open the template in the editor.
     }
     #footer .members{
         border-bottom:1px dashed rgba(255,255,255,0.2);
+    }
+}
+@media screen and (max-width: 900px) 
+    and (min-width: 700px),
+     (max-width: 600px){
+    #listGenericFlight .flight {
+        flex-wrap: wrap;
+    }
+    #listGenericFlight .flight .info{
+        order:3;
+    }
+    #listGenericFlight .flight .options{
+        order:2;
+        width:calc(100% - 150px);
     }
 }
 @media screen and (max-width: 600px) {

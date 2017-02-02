@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <body>
+
+        <ui:composition template="./template/original.xhtml">
+
+            <ui:define name="content">
+                <div id="position">
+                    <ul>
+                        <li><a href="./index.xhtml">Descripción</a></li>
+                        <li><a href="./genericFlight.xhtml">Vuelos genéricos</a></li>
+                        <li><a href="./flight.xhtml">Vuelo #4125</a></li>
+                        <li><a href="./reservation.xhtml">Reserva</a></li>
+                        <li>Confirmación</li>
+                    </ul>
+                </div>
+                <h1>Confirmación</h1>
+                <div id="confirmation">
+                    <h2 class="success"><i class="fa fa-check-circle"></i> Enhorabuena</h2>
+                    <p>
+                        La compañía <strong>Iberia</strong> le informa que su vuelo 
+                        número <strong>4125</strong> con la fecha <strong>10/02/2017</strong>
+                        y destino <strong>Madrid, España, Ni idea</strong> ha sido confirmada.<br />
+                        <br />
+                        Puede recoger su billete en el aeropuerto.<br />
+                        Muchas gracias por comprar tu billete en <strong>WilsonLine</strong>
+                    </p>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

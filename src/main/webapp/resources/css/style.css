@@ -88,7 +88,7 @@ a{
 input[type="range"]{
     width:100%;
 }
-input[type="text"]{
+input[type="text"], select{
     padding: 5px;
     border:none;
     background-color:#F3F2F0;
@@ -208,6 +208,7 @@ button:hover {
     color:#333;
     background-color:#f3f2f0;
     display:none;
+    margin-left:-39px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.25);
 }
 #language li{
@@ -220,4 +221,138 @@ ul{
     margin:0;
     padding:0;
     list-style:none;
+}
+#position{
+    background-color: #eee;
+    color: #333;
+    border-radius: 3px;
+    padding:10px;
+}
+#position ul{
+    display:block;
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+#position ul li{
+    display:inline-block;
+}
+#position ul li:after {
+    content: " > ";
+}
+#position ul li:last-of-type:after{
+    content: "";
+}
+#position ul li a{
+    color: #007BAF;
+}
+#position ul li a:hover{
+    color: #005C84;
+}
+#listGenericFlight .flight{
+    margin-bottom: 10px;
+    border:1px solid #eee;
+    transition:box-shadow .5s;
+    display:flex;
+}
+#listGenericFlight .flight:hover{
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+#listGenericFlight .flight img{
+    width: 150px;
+    height: 150px;
+}
+#listGenericFlight .flight .info,
+#listGenericFlight .flight .options{
+    padding: 10px;
+}
+#listGenericFlight .flight .info{
+    border-right:1px dashed #eee;
+    width:100%;
+}
+#listGenericFlight .flight .info p,
+#listGenericFlight .flight .info h2{
+    margin:0;
+    padding: 2.5px 0;
+}
+#listGenericFlight .flight .info span{
+    margin-right:5px;
+    padding: 2px 4px;
+    background-color: #eee;
+    display:inline-block;
+}
+#listGenericFlight .flight .options{
+    font-size:26px;
+    text-align:right;
+}
+#listGenericFlight .flight .options .id,
+#listGenericFlight .flight .info i{
+    color:#aaa;
+}
+#listGenericFlight .flight .options .id:before{
+    content: "#";
+}
+#listGenericFlight .flight .options .price:after{
+    content: " €";
+}
+#listGenericFlight .flight .options span{
+    display:block;
+    margin-bottom:10px;
+}
+#flight {
+    border-collapse: collapse;
+    width:100%;   
+}
+#flight th,
+#flight td{
+    padding:5px;
+}
+#flight tr{
+    border:1px solid #eee;
+}
+#flight th{
+    text-align:left;
+    background-color:#eee;
+}
+#flight td:last-of-type{
+    text-align:right;
+    padding:0;
+}
+#flight td:last-of-type{
+    text-align:right;
+}
+#flight tr:hover{
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+#reservation {
+    text-align:center;
+}
+#reservation input,
+#reservation select,
+#reservation label{
+    display:block;
+    margin:0;
+    padding:10px;
+}
+#reservation input,
+#reservation select{
+    margin-bottom:2.5px;
+}
+#reservation .inputs,
+#reservation .labels{
+    width:auto;
+    display:inline-block;
+    margin-bottom:10px;
+}
+#reservation .inputs{
+    text-align:left;
+}
+#reservation .labels{
+    text-align:right;
+}
+.success {
+    color:green;
+}
+#confirmation {
+    text-align:center;
 }

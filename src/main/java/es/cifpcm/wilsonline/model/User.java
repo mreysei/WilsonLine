@@ -1,11 +1,16 @@
-package es.cifpcm.wilsonline.mock.pojo;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package es.cifpcm.wilsonline.model;
 
 /**
  *
- * @author Cristina
+ * @author maike
  */
-public class Reservations
-{
+public class User {
+    private Integer reservationNumber;
     private String name;
     private String surname;
     private String telephone;
@@ -14,9 +19,16 @@ public class Reservations
     private Double totalPrice;
     private Integer flightNumber;
     
-    public Reservations()
-    {
+    public User(){
         
+    }
+
+    public Integer getReservationNumber() {
+        return reservationNumber;
+    }
+
+    public void setReservationNumber(Integer reservationNumber) {
+        this.reservationNumber = reservationNumber;
     }
 
     public String getName() {
@@ -74,4 +86,5 @@ public class Reservations
     public void setFlightNumber(Integer flightNumber) {
         this.flightNumber = flightNumber;
     }
+    
 }

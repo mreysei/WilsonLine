@@ -3,7 +3,7 @@ package es.cifpcm.wilsonline.daoimpl;
 import es.cifpcm.wilsonline.abstraction.BaseDao;
 import es.cifpcm.wilsonline.interfaces.ConnectionProvider;
 import es.cifpcm.wilsonline.interfaces.GenericDao;
-import es.cifpcm.wilsonline.model.GenericFlight;
+import es.cifpcm.wilsonline.model.Airline;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,50 +17,46 @@ import org.slf4j.LoggerFactory;
  *
  * @author Cristina
  */
-public class GenericFlightDao extends BaseDao implements GenericDao<GenericFlight>
+public class AirlineDao extends BaseDao implements GenericDao<Airline>
 {
-    private static final Logger LOG = LoggerFactory.getLogger(GenericFlightDao.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Airline.class);
     
-    public GenericFlightDao(ConnectionProvider conn)
+    public AirlineDao(ConnectionProvider conn)
     {
         super(conn);
     }
 
     @Override
-    public GenericFlight select(Integer id) {
+    public Airline select(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<GenericFlight> selectByCriteria(String condition)
+    public List<Airline> selectByCriteria(String condition) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Airline> selectAll()
     {
-        String text = "select generic_flight_id, origin, destiny, arrive_time," +
-                        "departure_time, price, airline from v_generic_flight" +
-                        condition;
+        String text = "select name from v_airline";
         
         try(Connection conn = super.connProvider.getConnection();
                 PreparedStatement query = conn.prepareStatement(text);
                 ResultSet results = query.executeQuery())
         {
-            GenericFlight genericFlight;
-            List<GenericFlight> genericFlights = new ArrayList<>();
+            List<Airline> airlines = new ArrayList<>();
+            Airline airline;
             
             while(results.next())
             {
-                genericFlight = new GenericFlight();
+                airline = new Airline();
+                airline.setName(results.getString("name"));
                 
-                genericFlight.setGenericFlightId(results.getString("generic_flight_id"));
-                genericFlight.setOrigin(results.getString("origin"));
-                genericFlight.setDestiny(results.getString("destiny"));
-                genericFlight.setDepartureTime(results.getString("arrive_time"));
-                genericFlight.setArriveTime(results.getString("departure_time"));
-                genericFlight.setPrice(results.getDouble("price"));
-                genericFlight.setAirline(results.getString("airline"));
-                
-                genericFlights.add(genericFlight);
+                airlines.add(airline);
             }
             
-            return genericFlights;
+            return airlines;
             
         } catch(SQLException ex)
         {
@@ -71,12 +67,7 @@ public class GenericFlightDao extends BaseDao implements GenericDao<GenericFligh
     }
 
     @Override
-    public List<GenericFlight> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean insert(GenericFlight element) {
+    public boolean insert(Airline element) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

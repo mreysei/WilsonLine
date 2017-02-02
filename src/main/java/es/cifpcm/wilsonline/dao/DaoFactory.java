@@ -1,5 +1,6 @@
 package es.cifpcm.wilsonline.dao;
 
+import es.cifpcm.wilsonline.daoimpl.AirlineDao;
 import es.cifpcm.wilsonline.daoimpl.FlightDao;
 import es.cifpcm.wilsonline.daoimpl.GenericFlightDao;
 import es.cifpcm.wilsonline.daoimpl.ReservationsDao;
@@ -38,7 +39,7 @@ public class DaoFactory implements ConnectionProvider
         }
     }
     
-    public synchronized DaoFactory getInstance()
+    public static synchronized DaoFactory getInstance()
     {
         if(instance == null)
         {
@@ -62,18 +63,23 @@ public class DaoFactory implements ConnectionProvider
         }
     }
     
-    public GenericDao getGenericFlight()
+    public GenericDao getGenericFlightDao()
     {
         return new GenericFlightDao(instance);
     }
     
-    public GenericDao getFlight()
+    public GenericDao getFlightDao()
     {
         return new FlightDao(instance);
     }
     
-    public GenericDao getReservations()
+    public GenericDao getReservationsDao()
     {
         return new ReservationsDao(instance);
+    }
+    
+    public GenericDao getAirlineDao()
+    {
+        return new AirlineDao(instance);
     }
 }

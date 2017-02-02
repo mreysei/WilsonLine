@@ -2,7 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -28,7 +31,26 @@
                 <form>
                     <label for="price">Precio máximo</label>
                     <input type="text" size="4" readonly="true" class="price" /><br />
-                    <input type="range" id="price" min="0" max="1500" value="750" />
+                    <input type="range" id="price" min="0" max="1500"
+                           value="#{genericFlightBean.price}" />
+                    
+                    <!-- Remember to delete this -->
+                    <label for="departureTime">Hora de salida:</label>
+                    <input type="text" id="departureTime"
+                           value="#{genericFlightBean.departureTime}"></input>
+                    
+                    <label for="arriveTime">Hora de llegada:</label>
+                    <input type="text" id="arriveTime"
+                           value="#{genericFlightBean.arriveTime}"></input>
+                    
+                    <p:selectManyCheckbox value="#{genericFlightBean.airlines}">
+                        <c:forEach var="airline" items="#{genericFlightBean.getAllAirlines()}">
+                            <f:selectItem itemValue="#{airline.name}"
+                                          itemLabel="#{airline.name}"/>
+                        </c:forEach>
+                    </p:selectManyCheckbox>
+                    
+                    <p:commandButton type="submit" action="#{genericFlightBean.search()}"/>
                 </form>
             </div>
             <div id="right">

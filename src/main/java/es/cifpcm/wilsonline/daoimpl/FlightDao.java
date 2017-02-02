@@ -3,7 +3,7 @@ package es.cifpcm.wilsonline.daoimpl;
 import es.cifpcm.wilsonline.abstraction.BaseDao;
 import es.cifpcm.wilsonline.interfaces.ConnectionProvider;
 import es.cifpcm.wilsonline.interfaces.GenericDao;
-import es.cifpcm.wilsonline.mock.pojo.Flight;
+import es.cifpcm.wilsonline.model.Flight;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,8 +51,8 @@ public class FlightDao extends BaseDao implements GenericDao<Flight>
                 
                 flight.setFlightNumber(results.getInt("flight_number"));
                 flight.setFreeSeatings(results.getInt("free_seatings"));
-                flight.setDate(results.getDate("date"));
-                flight.setGenericFlightId(results.getInt("genericFlight_generic_flight_id"));
+                flight.setDate(results.getString("date"));
+                flight.setGenericFlightId(results.getString("genericFlight_generic_flight_id"));
                 
                 flights.add(flight);
             }

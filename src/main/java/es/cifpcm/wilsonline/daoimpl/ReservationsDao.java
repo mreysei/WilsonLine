@@ -3,7 +3,8 @@ package es.cifpcm.wilsonline.daoimpl;
 import es.cifpcm.wilsonline.abstraction.BaseDao;
 import es.cifpcm.wilsonline.interfaces.ConnectionProvider;
 import es.cifpcm.wilsonline.interfaces.GenericDao;
-import es.cifpcm.wilsonline.mock.pojo.Reservations;
+import es.cifpcm.wilsonline.model.Reservations;
+import es.cifpcm.wilsonline.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Cristina
  */
-public class ReservationsDao extends BaseDao implements GenericDao<Reservations>
+public class ReservationsDao extends BaseDao implements GenericDao<User>
 {
     private static final Logger LOG = LoggerFactory.getLogger(GenericFlightDao.class);
     
@@ -25,22 +26,22 @@ public class ReservationsDao extends BaseDao implements GenericDao<Reservations>
     }
     
     @Override
-    public Reservations select(Integer id) {
+    public User select(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Reservations> selectByCriteria(String condition) {
+    public List<User> selectByCriteria(String condition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Reservations> selectAll() {
+    public List<User> selectAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean insert(Reservations element)
+    public boolean insert(User element)
     {
         String text = "insert into reservations(name, surname, telephone," +
                         " credit_card_type, credit_card_number, total_price," +
@@ -68,7 +69,7 @@ public class ReservationsDao extends BaseDao implements GenericDao<Reservations>
         
         return false;
     }
-
+    
     @Override
     public boolean update() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

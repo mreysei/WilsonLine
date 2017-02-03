@@ -5,34 +5,23 @@
  */
 package es.cifpcm.wilsonline.model;
 
-<<<<<<< HEAD
 import java.util.List;
 
-=======
->>>>>>> refs/remotes/origin/master
 /**
  *
  * @author maike
  */
 public class GenericFlight {
     private String genericFlightId;
-<<<<<<< HEAD
     private Integer departureHours;
     private Integer departureMinutes;
     private Integer arriveHours;
     private Integer arriveMinutes;
-=======
-    private String arriveTime;
-    private String departuraTime;
->>>>>>> refs/remotes/origin/master
     private String origin;
     private String destiny;
     private Double price;
     private String airline;
-<<<<<<< HEAD
     private List<String> airlines;
-=======
->>>>>>> refs/remotes/origin/master
 
     public GenericFlight(){
         
@@ -42,7 +31,6 @@ public class GenericFlight {
         return genericFlightId;
     }
 
-<<<<<<< HEAD
     public Integer getDepartureHours() {
         return departureHours;
     }
@@ -77,26 +65,6 @@ public class GenericFlight {
 
     public void setGenericFlightId(String genericFlightId) {
         this.genericFlightId = genericFlightId;
-=======
-    public void setGenericFlightId(String genericFlightId) {
-        this.genericFlightId = genericFlightId;
-    }
-
-    public String getArriveTime() {
-        return arriveTime;
-    }
-
-    public void setArriveTime(String arriveTime) {
-        this.arriveTime = arriveTime;
-    }
-
-    public String getDeparturaTime() {
-        return departuraTime;
-    }
-
-    public void setDeparturaTime(String departuraTime) {
-        this.departuraTime = departuraTime;
->>>>>>> refs/remotes/origin/master
     }
 
     public String getOrigin() {
@@ -130,7 +98,6 @@ public class GenericFlight {
     public void setAirline(String airline) {
         this.airline = airline;
     }
-<<<<<<< HEAD
 
     public List<String> getAirlines() {
         return airlines;
@@ -139,8 +106,4 @@ public class GenericFlight {
     public void setAirlines(List<String> airlines) {
         this.airlines = airlines;
     }
-=======
-    
-    
->>>>>>> refs/remotes/origin/master
 }

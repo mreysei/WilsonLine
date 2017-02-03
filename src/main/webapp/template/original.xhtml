@@ -38,6 +38,7 @@
             <div id="bg"></div>
             <div id="left">
                 <h1>Búsqueda</h1>
+<<<<<<< HEAD
                 <h:form>
                     <p>
                         <b>Precio máximo</b>
@@ -45,11 +46,19 @@
                         <!-- <input type="text" size="4" name="price" readonly="true" class="price" /><br /> --> <!-- get this value -->
                         <!-- <input type="range" id="price" min="0" max="1500"
                                value="#{genericFlightBean.price}" /> -->
+=======
+                <form>
+                    <p>
+                        <b>Precio máximo</b>
+                        <input type="text" size="4" name="price" readonly="true" class="price" /><br /><!-- get this value -->
+                        <input type="range" id="price" min="0" max="1500" value="750" />
+>>>>>>> refs/remotes/origin/master
                     </p>
                     <p>
                         <b>Horas</b>
                         <div class="gray">
                             <label for="hourOut">Salida</label>
+<<<<<<< HEAD
                             <h:inputText id="hourOut" value="#{genericFlightBean.departureTime}"/>
                             <h:inputText id="hourIn" value="#{genericFlightBean.arriveTime}"/>
                             <label for="hourIn">Llegada</label>
@@ -66,6 +75,22 @@
                     <h:commandButton id="find" action="#{genericFlightBean.search()}"
                                      value="Realizar búsqueda"/>
                 </h:form>
+=======
+                            <input type="time" id="hourOut" name="hourOut" /><!-- get this value -->
+                            <input type="time" id="hourIn" name="hourIn" /><!-- get this value -->
+                            <label for="hourIn">Llegada</label>
+                        </div>
+                    </p>
+                    <p>
+                        <b>Compañías</b><br />
+                        <input type="checkbox" name="company" id="C1" value="Iberia" /><label for="C1">Iberia</label><br />
+                        <input type="checkbox" name="company" id="C2" value="Spanair" /><label for="C2">Spanair</label><br />
+                        <input type="checkbox" name="company" id="C3" value="Ryanair" /><label for="C3">Ryanair</label><br />
+                        <input type="checkbox" name="company" id="C4" value="Air Europa" /><label for="C4">Air Europa</label>
+                    </p>
+                    <button type="button" id="find">Realizar busqueda</button>
+                </form>
+>>>>>>> refs/remotes/origin/master
             </div>
             <div id="right">
                 <ui:insert name="content">Content</ui:insert>

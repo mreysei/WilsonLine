@@ -2,7 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -35,16 +38,44 @@
             <div id="bg"></div>
             <div id="left">
                 <h1>Búsqueda</h1>
+<<<<<<< HEAD
+                <h:form>
+                    <p>
+                        <b>Precio máximo</b>
+                        <h:inputText size="4" class="price" value="#{genericFlightBean.price}"/>
+                        <!-- <input type="text" size="4" name="price" readonly="true" class="price" /><br /> --> <!-- get this value -->
+                        <!-- <input type="range" id="price" min="0" max="1500"
+                               value="#{genericFlightBean.price}" /> -->
+=======
                 <form>
                     <p>
                         <b>Precio máximo</b>
                         <input type="text" size="4" name="price" readonly="true" class="price" /><br /><!-- get this value -->
                         <input type="range" id="price" min="0" max="1500" value="750" />
+>>>>>>> refs/remotes/origin/master
                     </p>
                     <p>
                         <b>Horas</b>
                         <div class="gray">
                             <label for="hourOut">Salida</label>
+<<<<<<< HEAD
+                            <h:inputText id="hourOut" value="#{genericFlightBean.departureTime}"/>
+                            <h:inputText id="hourIn" value="#{genericFlightBean.arriveTime}"/>
+                            <label for="hourIn">Llegada</label>
+                        </div>
+                    </p>
+                    <b>Compañías</b><br />
+                    <h:selectManyCheckbox value="#{genericFlightBean.airlines}">
+                        <c:forEach var="airline" items="#{genericFlightBean.getAllAirlines()}">
+                            <f:selectItem itemValue="#{airline.name}"
+                                          itemLabel="#{airline.name}"/>
+                        </c:forEach>
+                    </h:selectManyCheckbox>
+                    
+                    <h:commandButton id="find" action="#{genericFlightBean.search()}"
+                                     value="Realizar búsqueda"/>
+                </h:form>
+=======
                             <input type="time" id="hourOut" name="hourOut" /><!-- get this value -->
                             <input type="time" id="hourIn" name="hourIn" /><!-- get this value -->
                             <label for="hourIn">Llegada</label>
@@ -59,6 +90,7 @@
                     </p>
                     <button type="button" id="find">Realizar busqueda</button>
                 </form>
+>>>>>>> refs/remotes/origin/master
             </div>
             <div id="right">
                 <ui:insert name="content">Content</ui:insert>
@@ -83,7 +115,5 @@
                 </div>
             </div>
         </div>
-
     </h:body>
-
 </html>

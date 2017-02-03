@@ -13,8 +13,10 @@ import java.util.List;
  */
 public class GenericFlight {
     private String genericFlightId;
-    private String arriveTime;
-    private String departureTime;
+    private Integer departureHours;
+    private Integer departureMinutes;
+    private Integer arriveHours;
+    private Integer arriveMinutes;
     private String origin;
     private String destiny;
     private Double price;
@@ -29,24 +31,40 @@ public class GenericFlight {
         return genericFlightId;
     }
 
+    public Integer getDepartureHours() {
+        return departureHours;
+    }
+
+    public void setDepartureHours(Integer departureHours) {
+        this.departureHours = departureHours;
+    }
+
+    public Integer getDepartureMinutes() {
+        return departureMinutes;
+    }
+
+    public void setDepartureMinutes(Integer departureMinutes) {
+        this.departureMinutes = departureMinutes;
+    }
+
+    public Integer getArriveHours() {
+        return arriveHours;
+    }
+
+    public void setArriveHours(Integer arriveHours) {
+        this.arriveHours = arriveHours;
+    }
+
+    public Integer getArriveMinutes() {
+        return arriveMinutes;
+    }
+
+    public void setArriveMinutes(Integer arriveMinutes) {
+        this.arriveMinutes = arriveMinutes;
+    }
+
     public void setGenericFlightId(String genericFlightId) {
         this.genericFlightId = genericFlightId;
-    }
-
-    public String getArriveTime() {
-        return arriveTime;
-    }
-
-    public void setArriveTime(String arriveTime) {
-        this.arriveTime = arriveTime;
-    }
-
-    public String getDepartureTime() {
-        return departureTime;
-    }
-
-    public void setDepartureTime(String departuraTime) {
-        this.departureTime = departuraTime;
     }
 
     public String getOrigin() {

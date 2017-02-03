@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./template/original.xhtml">
+
+            <ui:define name="content">
+                <div id="position">
+                    <ul>
+                        <li><a href="./index.xhtml">Descripción</a></li>
+                        <li>Vuelos genéricos</li>
+                    </ul>
+                </div>
+                <h1>Vuelos genéricos</h1>
+                <div id="listGenericFlight">
+                    <!-- <c:forEach> -->
+                    <c:forEach var="genericFlight" items="#{genericFlightBean.genericFlightsSelected}">
+                        <div class="flight">
+                            <h:graphicImage library="img" name="company/#{genericFlight.airline}.png"/>
+                            <div class="info">
+                                <h2>#{genericFlight.airline}</h2>
+                                <p>
+                                    <i class="fa fa-plane"></i> De <strong>#{genericFlight.origin}</strong>
+                                    <br/>
+                                    <i class="fa fa-plane"></i> A <strong>#{genericFlight.destiny}</strong>
+                                </p>
+                                <p>
+                                    Horas disponibles:<br/>
+                                    <span>#{genericFlight.departureHours}:#{genericFlight.departureMinutes}</span>
+                                    <span>#{genericFlight.arriveHours}:#{genericFlight.arriveMinutes}</span>
+                                </p>
+                                <p>
+                                    <div class="options">
+                                        <span class="id">#{genericFlight.genericFlightId}</span>
+                                        <span class="price">#{genericFlight.price}</span>
+                                        <h:commandButton value="Seleccionar"/>
+                                    </div>
+                                </p>
+                            </div>                            
+                        </div>
+                    </c:forEach>
+                    
+                    
+                    <!-- <div class="flight">
+                        <h:graphicImage library="img" name="company/Iberia.png" /> -->
+                        <!-- <h:graphicImage library="img" name="company/NOMBRECOMPAÑIA.png" /> -->
+                        <!-- <div class="info">
+                            <h2>Iberia</h2>
+                            <p>
+                                <i class="fa fa-plane"></i> De <strong>Tenerife, España, Los Rodeos</strong><br />
+                                <i class="fa fa-plane"></i> A <strong>Madrid, España, Ni idea</strong>
+                            </p>
+                            <p>Horas disponibles<br /><span>13:30</span><span>16:30</span><span>19:45</span><span>22:15</span></p>
+                        </div>
+                        <div class="options">
+                            <span class="id">4124</span>
+                            <span class="price">150</span>
+                            <button type="button">Seleccionar</button>
+                        </div>
+                    </div> -->
+                    <!-- </c:forEach> -->
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -3,13 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
         <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="device.css" />
         <h:outputStylesheet library="css" name="font-awesome.css" />
         <h:outputScript library="js" name="jquery.js" />
         <h:outputScript library="js" name="script.js" />
@@ -21,6 +23,14 @@
 
         <div id="header">
             <div class="container">
+                <div id="language">
+                    <h3><i class="fa fa-flag"></i></h3>
+                    <ul>
+                        <li><a href="#">Español</a></li>
+                        <li><a href="#">English</a></li>
+                        <li><a href="#">Català</a></li>
+                    </ul>
+                </div>
                 <h:graphicImage library="img" name="logo.png" />
             </div>
         </div>
@@ -28,39 +38,57 @@
             <div id="bg"></div>
             <div id="left">
                 <h1>Búsqueda</h1>
-                <form>
-                    <label for="price">Precio máximo</label>
-                    <input type="text" size="4" readonly="true" class="price" /><br />
-                    <input type="range" id="price" min="0" max="1500"
-                           value="#{genericFlightBean.price}" />
-                    
-                    <!-- Remember to delete this -->
-                    <label for="departureTime">Hora de salida:</label>
-                    <input type="text" id="departureTime"
-                           value="#{genericFlightBean.departureTime}"></input>
-                    
-                    <label for="arriveTime">Hora de llegada:</label>
-                    <input type="text" id="arriveTime"
-                           value="#{genericFlightBean.arriveTime}"></input>
-                    
-                    <p:selectManyCheckbox value="#{genericFlightBean.airlines}">
+                <h:form>
+                    <p>
+                        <b>Precio máximo</b>
+                        <h:inputText size="4" class="price" value="#{genericFlightBean.price}"/>
+                        <!-- <input type="text" size="4" name="price" readonly="true" class="price" /><br /> --> <!-- get this value -->
+                        <!-- <input type="range" id="price" min="0" max="1500"
+                               value="#{genericFlightBean.price}" /> -->
+                    </p>
+                    <p>
+                        <b>Horas</b>
+                        <div class="gray">
+                            <label for="hourOut">Salida</label>
+                            <h:inputText id="hourOut" value="#{genericFlightBean.departureTime}"/>
+                            <h:inputText id="hourIn" value="#{genericFlightBean.arriveTime}"/>
+                            <label for="hourIn">Llegada</label>
+                        </div>
+                    </p>
+                    <b>Compañías</b><br />
+                    <h:selectManyCheckbox value="#{genericFlightBean.airlines}">
                         <c:forEach var="airline" items="#{genericFlightBean.getAllAirlines()}">
                             <f:selectItem itemValue="#{airline.name}"
                                           itemLabel="#{airline.name}"/>
                         </c:forEach>
-                    </p:selectManyCheckbox>
+                    </h:selectManyCheckbox>
                     
-                    <p:commandButton type="submit" action="#{genericFlightBean.search()}"/>
-                </form>
+                    <h:commandButton id="find" action="#{genericFlightBean.search()}"
+                                     value="Realizar búsqueda"/>
+                </h:form>
             </div>
             <div id="right">
                 <ui:insert name="content">Content</ui:insert>
             </div>
         </div>
         <div id="footer">
-            
+            <div class="container">
+                <div class="members">
+                    <h1>Miembros</h1>
+                    <ul>
+                        <li>Javier Gracia Gonzalez - <a href="https://twitter.com/javigracia" target="_blank">@javigracia</a></li>
+                        <li>Cristina Peón Padilla - <a href="https://twitter.com/CristiDeveloper" target="_blank">@CristiDeveloper</a></li>
+                        <li>Michael Reyes Seiffert - <a href="https://twitter.com/mreysei" target="_blank">@mreysei</a></li>
+                    </ul>
+                </div>
+                <div class="links">
+                    <h1>Enlaces</h1>
+                    <ul>
+                        <li><a href="http://github.com/mreysei/WilsonLine">Github</a></li>
+                        <li><a href="https://trello.com/b/1HOBOqtP">Trello</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-
     </h:body>
-
 </html>

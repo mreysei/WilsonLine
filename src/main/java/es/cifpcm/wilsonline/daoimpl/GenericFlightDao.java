@@ -34,8 +34,9 @@ public class GenericFlightDao extends BaseDao implements GenericDao<GenericFligh
     @Override
     public List<GenericFlight> selectByCriteria(String condition)
     {
-        String text = "select generic_flight_id, origin, destiny, arrive_time," +
-                        "departure_time, price, airline from v_generic_flight" +
+        String text = "select generic_flight_id, origin, destiny, arrive_hour," +
+                        " arrive_minutes, departure_hour, departure_minutes," +
+                        " price, airline from v_generic_flight" +
                         condition;
         
         try(Connection conn = super.connProvider.getConnection();
@@ -52,8 +53,10 @@ public class GenericFlightDao extends BaseDao implements GenericDao<GenericFligh
                 genericFlight.setGenericFlightId(results.getString("generic_flight_id"));
                 genericFlight.setOrigin(results.getString("origin"));
                 genericFlight.setDestiny(results.getString("destiny"));
-                genericFlight.setDepartureTime(results.getString("arrive_time"));
-                genericFlight.setArriveTime(results.getString("departure_time"));
+                genericFlight.setArriveHours(results.getInt("arrive_hour"));
+                genericFlight.setArriveMinutes(results.getInt("arrive_minutes"));
+                genericFlight.setDepartureHours(results.getInt("departure_hour"));
+                genericFlight.setDepartureMinutes(results.getInt("departure_minutes"));
                 genericFlight.setPrice(results.getDouble("price"));
                 genericFlight.setAirline(results.getString("airline"));
                 

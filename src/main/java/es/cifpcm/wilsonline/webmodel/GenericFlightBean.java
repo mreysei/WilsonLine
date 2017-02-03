@@ -20,7 +20,11 @@ import org.slf4j.LoggerFactory;
 public class GenericFlightBean extends GenericFlight implements Serializable
 {
     private static final Logger LOG = LoggerFactory.getLogger(GenericFlightBean.class);
-    private List<GenericFlight> airlinesSelected;
+    private List<GenericFlight> genericFlightsSelected;
+    
+    private boolean timeSelected;
+    private String arriveTime;
+    private String departureTime;
     
     /**
      * Creates a new instance of GenericFlightBean
@@ -29,74 +33,149 @@ public class GenericFlightBean extends GenericFlight implements Serializable
     {
         
     }
-
-    public List<GenericFlight> getAirlinesSelected()
+    
+    public List<GenericFlight> getGenericFlightsSelected()
     {
-        return airlinesSelected;
+        return genericFlightsSelected;
     }
 
-    public void setAirlinesSelected(List<GenericFlight> airlinesSelected) 
+    public void setGenericFlightsSelected(List<GenericFlight> genericFlightsSelected)
     {
-        this.airlinesSelected = airlinesSelected;
+        this.genericFlightsSelected = genericFlightsSelected;
+    }
+    
+    public String getArriveTime()
+    {
+        return arriveTime;
+    }
+
+    public void setArriveTime(String arriveTime)
+    {
+        this.arriveTime = arriveTime;
+    }
+
+    public String getDepartureTime()
+    {
+        return departureTime;
+    }
+
+    public void setDepartureTime(String departureTime)
+    {
+        this.departureTime = departureTime;
     }
     
     public String search()
     {
         if(validate())
         {
-            String condition = "";
+            String condition = " where";
+            
+            if(this.getPrice() != null)
+            {
+                condition += " price<=" + this.getPrice() + " and";
+            }
+            
+            if(this.timeSelected)
+            {
+                condition += " departure_hour>=" + this.getDepartureHours() + " and";
+                
+                condition += " arrive_hour<=" + this.getArriveHours() + " and";
+                condition += " arrive_minutes<=" + this.getArriveMinutes() + " and";
+            }
             
             if(this.getAirlines().size() > 0)
             {
-                /*for(String value : this.getAirlines())
+                condition += " (";
+                
+                for(String value : this.getAirlines())
                 {
-                    condition += " v_generic_flight like '%" + value + "%'";
-                }*/
+                    condition += " airline like '%" + value + "%' or";
+                }
+                
+                condition = condition.substring(0, condition.lastIndexOf(" "));
+                
+                condition += ")";
             }
-            else
+            else if(condition.length() > 0)
             {
-                condition = " where v_generic_flight.price<=" + this.getPrice() +
-                    " and v_generic_flight.departure_time<=" + this.getDepartureTime() +
-                    " and v_generic_flight.arrive_time<=" + this.getArriveTime();
+                condition = condition.substring(0, condition.lastIndexOf(" "));
             }
             
             GenericDao dao = DaoFactory.getInstance().getGenericFlightDao();
-            this.setAirlinesSelected(dao.selectByCriteria(condition));
+            this.genericFlightsSelected = dao.selectByCriteria(condition);
             
-            return "t_temporal1.xhtml";
+            if(this.genericFlightsSelected.size() > 0)
+            {
+                return "genericFlight.xhtml";
+            }
         }
         
-        return "notFound.xhtml";
+        return "t_error.xhtml";
     }
     
     private boolean validate()
     {
-        if(this.getPrice() != null && this.getDepartureTime() != null
-                && this.getArriveTime() != null && this.getAirlines() != null)
+        this.timeSelected = false;
+        
+        //If the user wants to find by the time, we check if the time is correct.
+        if(this.getDepartureTime() != null && this.getArriveTime() != null)
         {
-            if(this.validateTimeProperties())
+            if(!this.validateDepartureTime(this.getDepartureTime())
+                    || !this.validateArriveTime(this.getArriveTime()))
+            {
+                return false;
+            }
+            else
+            {
+                this.timeSelected = true;
+            }
+        }
+        
+        return true;
+    }
+    
+    private boolean validateDepartureTime(String timeSelected)
+    {
+        String[] time = timeSelected.split(":");
+        
+        try
+        {
+            this.setDepartureHours(Integer.parseInt(time[0]));
+            this.setDepartureMinutes(Integer.parseInt(time[1]));
+            
+            if(this.getDepartureHours() >= 0 && this.getDepartureHours() <= 23
+                    && this.getDepartureMinutes() >= 0 && this.getDepartureMinutes() <= 59)
             {
                 return true;
             }
+        } catch(NumberFormatException ex)
+        {
+            LOG.error(ex.getMessage());
         }
         
         return false;
     }
     
-    private boolean validateTimeProperties()
+    private boolean validateArriveTime(String timeSelected)
     {
+        String[] time = timeSelected.split(":");
+        
         try
         {
-            java.sql.Time.valueOf(this.getDepartureTime());
-            java.sql.Time.valueOf(this.getArriveTime());
+            this.setArriveHours(Integer.parseInt(time[0]));
+            this.setArriveMinutes(Integer.parseInt(time[1]));
             
-            return true;
+            if(this.getArriveHours() >= 0 && this.getArriveHours() <= 23
+                    && this.getArriveMinutes() >= 0 && this.getArriveMinutes() <= 59)
+            {
+                return true;
+            }
         } catch(NumberFormatException ex)
         {
             LOG.error(ex.getMessage());
-            
-            return false;
         }
+        
+        return false;
     }
     
     public List<Airline> getAllAirlines()

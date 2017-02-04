@@ -27,8 +27,33 @@ public class FlightDao extends BaseDao implements GenericDao<Flight>
     }
 
     @Override
-    public Flight select(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Flight select(Integer id)
+    {
+        String text = "select flight_number, date, free_seatings," +
+                        " genericFlight_generic_flight_id from v_flight" +
+                        " where flight_number=" + id;
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text);
+                ResultSet results = query.executeQuery())
+        {
+            Flight flight = new Flight();
+            
+            results.next();
+            
+            flight.setFlightNumber(results.getInt("flight_number"));
+            flight.setDate(results.getString("date"));
+            flight.setFreeSeatings(results.getInt("free_seatings"));
+            flight.setGenericFlightId(results.getString("genericFlight_generic_flight_id"));
+            
+            return flight;
+            
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return null;
     }
 
     @Override

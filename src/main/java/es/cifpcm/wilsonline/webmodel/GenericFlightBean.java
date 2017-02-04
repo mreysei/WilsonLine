@@ -5,8 +5,9 @@ import es.cifpcm.wilsonline.interfaces.GenericDao;
 import es.cifpcm.wilsonline.model.Airline;
 import es.cifpcm.wilsonline.model.GenericFlight;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +17,11 @@ import org.slf4j.LoggerFactory;
  * @author Cristina
  */
 @Named(value = "genericFlightBean")
-@RequestScoped
+@SessionScoped
 public class GenericFlightBean extends GenericFlight implements Serializable
 {
     private static final Logger LOG = LoggerFactory.getLogger(GenericFlightBean.class);
-    private List<GenericFlight> genericFlightsSelected;
+    private List<GenericFlight> genericFlightsSelected = new ArrayList<>();
     
     private boolean timeSelected;
     private String arriveTime;
@@ -77,10 +78,11 @@ public class GenericFlightBean extends GenericFlight implements Serializable
             
             if(this.timeSelected)
             {
-                condition += " departure_hour>=" + this.getDepartureHours() + " and";
+                condition += " (departure_hour>=" + this.getDepartureHours() + " and";
+                condition += " departure_hour<=" + this.getArriveHours() + " and";
                 
                 condition += " arrive_hour<=" + this.getArriveHours() + " and";
-                condition += " arrive_minutes<=" + this.getArriveMinutes() + " and";
+                condition += " arrive_minutes<=" + this.getArriveMinutes() + ") and";
             }
             
             if(this.getAirlines().size() > 0)
@@ -94,7 +96,7 @@ public class GenericFlightBean extends GenericFlight implements Serializable
                 
                 condition = condition.substring(0, condition.lastIndexOf(" "));
                 
-                condition += ")";
+                condition += " )";
             }
             else if(condition.length() > 0)
             {
@@ -104,31 +106,31 @@ public class GenericFlightBean extends GenericFlight implements Serializable
             GenericDao dao = DaoFactory.getInstance().getGenericFlightDao();
             this.genericFlightsSelected = dao.selectByCriteria(condition);
             
-            if(this.genericFlightsSelected.size() > 0)
+            if(this.genericFlightsSelected != null && this.genericFlightsSelected.size() > 0)
             {
-                return "genericFlight.xhtml";
+                return "genericFlight.xhtml?faces-redirect=true";
             }
         }
         
-        return "t_error.xhtml";
+        return "t_error.xhtml?faces-redirect=true";
     }
     
     private boolean validate()
     {
         this.timeSelected = false;
         
-        //If the user wants to find by the time, we check if the time is correct.
-        if(this.getDepartureTime() != null && this.getArriveTime() != null)
+        this.departureTime = this.getDepartureTime() == null ? "00:00" : this.getDepartureTime();
+        this.arriveTime = this.getArriveTime() == null ? "23:59" : this.getArriveTime();
+        
+        //We only check once if the time is correct or not.
+        if(!this.validateDepartureTime(this.getDepartureTime())
+                || !this.validateArriveTime(this.getArriveTime()))
         {
-            if(!this.validateDepartureTime(this.getDepartureTime())
-                    || !this.validateArriveTime(this.getArriveTime()))
-            {
-                return false;
-            }
-            else
-            {
-                this.timeSelected = true;
-            }
+            return false;
+        }
+        else
+        {
+            this.timeSelected = true;
         }
         
         return true;

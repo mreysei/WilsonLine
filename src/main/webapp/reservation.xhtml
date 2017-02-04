@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
@@ -17,12 +18,12 @@
                     </ul>
                 </div>
                 <h1>Reserva</h1>
-                <form id="reservation">
+                <h:form id="reservation">
                     <p>¡Ya estamos en el último paso!<br />Solo queda que confirmes tu pasaje :)</p>
                     <div class="labels">
                         <label for="txtId">ID</label>
-                        <label for="txtDate">Fecha</label>
-                        <label for="txtPrice">Importe</label>
+                        <label for="txtDate">Date</label>
+                        <label for="txtPrice">Precio</label>
                         <label for="txtName">Nombre</label>
                         <label for="txtSurname">Apellidos</label>
                         <label for="txtTelephone">Teléfono</label>
@@ -30,21 +31,22 @@
                         <label for="txtCreditCardNumber">Número de Tarjeta</label>
                     </div>
                     <div class="inputs">
-                        <input id="txtId" size="3" type="text" readonly="true" value="#4125" />
-                        <input id="txtDate" size="8" type="text" readonly="true" value="10/02/2017" />
-                        <input id="txtPrice" size="5" type="text" readonly="true" value="150 €" />
-                        <input id="txtName" type="text" />
-                        <input id="txtSurname" type="text" />
-                        <input id="txtTelephone" type="text" />
-                        <select id="txtCreditCardType">
+                        <input id="txtId" size="3" type="text" readonly="true" value="#{reservationsBean.flightNumber}" />
+                        <input id="txtDate" size="8" type="text" readonly="true" value="#{reservationsBean.date}" />
+                        <input id="txtPrice" size="5" type="text" readonly="true" value="#{reservationsBean.price} €" />
+                        <input id="txtName" type="text" value="#{userBean.name}" />
+                        <input id="txtSurname" type="text" value="#{userBean.surname}" />
+                        <input id="txtTelephone" type="text" value="#{userBean.telephone}" />
+                        <select id="txtCreditCardType" value="#{userBean.creditCardType}">
                             <option>Visa</option>
                             <option>Maestro</option>
                             <option>MasterCard</option>
                         </select>
-                        <input id="txtCreditCardNumber" type="text" />
+                        <input id="txtCreditCardNumber" value="#{userBean.creditCardNumber}" type="text" />
                     </div><br />
-                    <button type="button">Confirmar reserva</button>
-                </form>
+                    <h:commandButton action=""
+                                     value="Confirmar reserva"/>
+                </h:form>
             </ui:define>
 
         </ui:composition>

@@ -12,7 +12,7 @@ package es.cifpcm.wilsonline.model;
 public class Reservations {
     private Integer flightNumber;
     private String date;
-    private Integer price;
+    private Double price;
     
     public Reservations(){
         
@@ -34,11 +34,11 @@ public class Reservations {
         this.date = date;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
     

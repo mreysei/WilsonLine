@@ -72,7 +72,7 @@ public class ReservationsDao extends BaseDao implements GenericDao<User>
             query.setString(2, element.getSurname());
             query.setString(3, element.getTelephone());
             query.setString(4, element.getCreditCardType());
-            query.setInt(5, element.getCreditCardNumber());
+            query.setLong(5, Long.parseLong(element.getCreditCardNumber()));
             query.setDouble(6, element.getTotalPrice());
             query.setInt(7, element.getFlightNumber());
             

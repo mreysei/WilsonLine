@@ -8,6 +8,7 @@ import es.cifpcm.wilsonline.model.User;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.faces.context.FacesContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,7 +86,7 @@ public class UserBean extends User implements Serializable
             }
         }
         
-        return "t_error.xhtml?faces-redirect=true";
+        return "t_error2.xhtml?faces-redirect=true";
     }
     
     /**
@@ -115,6 +116,7 @@ public class UserBean extends User implements Serializable
         try
         {
             Integer.parseInt(this.getTelephone());
+            Long.parseLong(this.getCreditCardNumber());
             return true;
             
         } catch(NumberFormatException ex)
@@ -123,5 +125,13 @@ public class UserBean extends User implements Serializable
         }
         
         return false;
+    }
+    
+    /**
+     * Destroy the sesion for this user after all reservation process has been completed.
+     */
+    public void destroySession()
+    {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
     }
 }

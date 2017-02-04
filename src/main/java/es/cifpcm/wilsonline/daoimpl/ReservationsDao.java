@@ -3,7 +3,6 @@ package es.cifpcm.wilsonline.daoimpl;
 import es.cifpcm.wilsonline.abstraction.BaseDao;
 import es.cifpcm.wilsonline.interfaces.ConnectionProvider;
 import es.cifpcm.wilsonline.interfaces.GenericDao;
-import es.cifpcm.wilsonline.model.Reservations;
 import es.cifpcm.wilsonline.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

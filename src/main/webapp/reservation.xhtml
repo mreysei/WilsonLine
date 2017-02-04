@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -13,7 +14,7 @@
                     <ul>
                         <li><a href="./index.xhtml">Descripción</a></li>
                         <li><a href="./genericFlight.xhtml">Vuelos genéricos</a></li>
-                        <li><a href="./flight.xhtml">Vuelo #4125</a></li>
+                        <li><a href="./flight.xhtml">Vuelo #{reservationsBean.genericFlightSelected.genericFlightId}</a></li>
                         <li>Reserva</li>
                     </ul>
                 </div>
@@ -31,20 +32,20 @@
                         <label for="txtCreditCardNumber">Número de Tarjeta</label>
                     </div>
                     <div class="inputs">
-                        <input id="txtId" size="3" type="text" readonly="true" value="#{reservationsBean.flightNumber}" />
-                        <input id="txtDate" size="8" type="text" readonly="true" value="#{reservationsBean.date}" />
-                        <input id="txtPrice" size="5" type="text" readonly="true" value="#{reservationsBean.price} €" />
-                        <input id="txtName" type="text" value="#{userBean.name}" />
-                        <input id="txtSurname" type="text" value="#{userBean.surname}" />
-                        <input id="txtTelephone" type="text" value="#{userBean.telephone}" />
-                        <select id="txtCreditCardType" value="#{userBean.creditCardType}">
-                            <option>Visa</option>
-                            <option>Maestro</option>
-                            <option>MasterCard</option>
-                        </select>
-                        <input id="txtCreditCardNumber" value="#{userBean.creditCardNumber}" type="text" />
+                        <h:inputText id="txtId" size="3" readonly="true" value="" />
+                        <h:inputText id="txtDate" size="8" readonly="true" value="#{reservationsBean.date}" />
+                        <h:inputText id="txtPrice" size="5" readonly="true" value="#{reservationsBean.price} €" />
+                        <h:inputText id="txtName" value="#{userBean.name}" />
+                        <h:inputText id="txtSurname" value="#{userBean.surname}" />
+                        <h:inputText id="txtTelephone" value="#{userBean.telephone}" />
+                        <h:selectOneListbox id="txtCreditCardType" value="#{userBean.creditCardType}">
+                            <f:selectItem itemValue="Visa" itemLabel="Visa"/>
+                            <f:selectItem itemValue="Maestro" itemLabel="Maestro"/>
+                            <f:selectItem itemValue="MasterCard" itemLabel="MasterCard"/>
+                        </h:selectOneListbox>
+                        <h:inputText id="txtCreditCardNumber" value="#{userBean.creditCardNumber}"/>
                     </div><br />
-                    <h:commandButton action=""
+                    <h:commandButton action="#{userBean.commit(reservationsBean.flightNumber, reservationsBean.price)}"
                                      value="Confirmar reserva"/>
                 </h:form>
             </ui:define>

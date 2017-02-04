@@ -17,12 +17,24 @@ import java.io.Serializable;
 @SessionScoped
 public class ReservationsBean extends Reservations implements Serializable
 {
+    private GenericFlight genericFlightSelected;
+    
     /**
      * Creates a new instance of ReservationsBean
      */
     public ReservationsBean()
     {
         
+    }
+    
+    public GenericFlight getGenericFlightSelected()
+    {
+        return genericFlightSelected;
+    }
+
+    public void setGenericFlightSelected(GenericFlight genericFlightSelected)
+    {
+        this.genericFlightSelected = genericFlightSelected;
     }
     
     public String makeReservation(Integer number)
@@ -32,16 +44,15 @@ public class ReservationsBean extends Reservations implements Serializable
         if(this.getFlightNumber() != null)
         {
             Flight flight;
-            GenericFlight genericFlight;
             
             GenericDao dao = DaoFactory.getInstance().getFlightDao();
             flight = (Flight) dao.select(this.getFlightNumber());
             
             dao = DaoFactory.getInstance().getGenericFlightDao();
-            genericFlight = (GenericFlight) dao.select(Integer.parseInt(flight.getGenericFlightId()));
+            this.genericFlightSelected = (GenericFlight) dao.select(Integer.parseInt(flight.getGenericFlightId()));
             
             this.setDate(flight.getDate());
-            this.setPrice(genericFlight.getPrice());
+            this.setPrice(this.genericFlightSelected.getPrice());
             
             return "reservation.xhtml?faces-redirect=true";
         }

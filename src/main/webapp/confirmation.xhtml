@@ -12,7 +12,7 @@
                     <ul>
                         <li><a href="./index.xhtml">Descripción</a></li>
                         <li><a href="./genericFlight.xhtml">Vuelos genéricos</a></li>
-                        <li><a href="./flight.xhtml">Vuelo #4125</a></li>
+                        <li><a href="./flight.xhtml">Vuelo #{userBean.genericFlightSelected.genericFlightId}</a></li>
                         <li><a href="./reservation.xhtml">Reserva</a></li>
                         <li>Confirmación</li>
                     </ul>
@@ -21,10 +21,11 @@
                 <div id="confirmation">
                     <h2 class="success"><i class="fa fa-check-circle"></i> Enhorabuena</h2>
                     <p>
-                        La compañía <strong>Iberia</strong> le informa que su vuelo 
-                        número <strong>4125</strong> con la fecha <strong>10/02/2017</strong>
-                        y destino <strong>Madrid, España, Ni idea</strong> ha sido confirmada.<br />
-                        <br />
+                        La compañía <strong>#{userBean.genericFlightSelected.airline}</strong> le 
+                        informa que su vuelo número <strong>#{userBean.genericFlightSelected.genericFlightId}</strong> 
+                        con la fecha <strong>#{userBean.flightSelected.date}</strong>
+                        y destino <strong>#{userBean.genericFlightSelected.destiny}</strong> ha 
+                        sido confirmada.<br /><br />
                         Puede recoger su billete en el aeropuerto.<br />
                         Muchas gracias por comprar tu billete en <strong>WilsonLine</strong>
                     </p>

@@ -27,8 +27,39 @@ public class GenericFlightDao extends BaseDao implements GenericDao<GenericFligh
     }
 
     @Override
-    public GenericFlight select(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public GenericFlight select(Integer id)
+    {
+        String text = "select generic_flight_id, origin, destiny, arrive_hour," + 
+                        " arrive_minutes, departure_hour, departure_minutes," +
+                        " price, airline from v_generic_flight" +
+                        " where generic_flight_id=" + id;
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text);
+                ResultSet results = query.executeQuery())
+        {
+            GenericFlight genericFlight = new GenericFlight();
+            
+            results.next();
+            
+            genericFlight.setGenericFlightId(results.getString("generic_flight_id"));
+            genericFlight.setOrigin(results.getString("origin"));
+            genericFlight.setDestiny(results.getString("destiny"));
+            genericFlight.setArriveHours(results.getInt("arrive_hour"));
+            genericFlight.setArriveMinutes(results.getInt("arrive_minutes"));
+            genericFlight.setDepartureHours(results.getInt("departure_hour"));
+            genericFlight.setDepartureMinutes(results.getInt("departure_minutes"));
+            genericFlight.setPrice(results.getDouble("price"));
+            genericFlight.setAirline(results.getString("airline"));
+            
+            return genericFlight;
+            
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return null;
     }
 
     @Override

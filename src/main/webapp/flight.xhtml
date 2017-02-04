@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
@@ -23,12 +25,18 @@
                         <th></th>
                     </tr>
                     <!-- <c:forEach> -->
-                    <tr>
-                        <td>10/02/2017</td>
-                        <td>82 Pl.</td>
-                        <td><button type="button">Reservar vuelo</button></td>
-                    </tr>
-                    <!-- </c:forEach> -->
+                    <c:forEach var="flight" items="#{flightBean.flights}">
+                        <tr>
+                            <h:form>
+                            <td>#{flight.date}</td>
+                            <td>#{flight.freeSeatings} Pl.</td>
+                            <td>
+                                <h:commandButton action="#{reservationsBean.makeReservation(flight.flightNumber)}"
+                                    value="Reservar vuelo"/>
+                            </td>
+                            </h:form>
+                        </tr>
+                    </c:forEach>
                 </table>
             </ui:define>
 

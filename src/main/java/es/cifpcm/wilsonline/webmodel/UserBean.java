@@ -53,8 +53,14 @@ public class UserBean extends User implements Serializable
     
     public String commit(String flightNumber, Double price)
     {
-        this.setFlightNumber(Integer.parseInt(flightNumber));
-        this.setTotalPrice(price);
+        try
+        {
+            this.setFlightNumber(Integer.parseInt(flightNumber));
+            this.setTotalPrice(price);
+        } catch(NumberFormatException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
         
         if(this.validate())
         {

@@ -18,31 +18,28 @@
                     <!-- <c:forEach> -->
                     <c:forEach var="genericFlight" items="#{genericFlightBean.genericFlightsSelected}">
                         <h:form>
-                        <div class="flight">
-                            <h:graphicImage library="img" name="company/#{genericFlight.airline}.png"/>
-                            <div class="info">
-                                <h2>#{genericFlight.airline}</h2>
-                                <p>
-                                    <i class="fa fa-plane"></i> De <strong>#{genericFlight.origin}</strong>
-                                    <br/>
-                                    <i class="fa fa-plane"></i> A <strong>#{genericFlight.destiny}</strong>
-                                </p>
-                                <p>
-                                    Horas disponibles:<br/>
-                                    <span>#{genericFlight.departureHours}:#{genericFlight.departureMinutes}</span>
-                                    <span>#{genericFlight.arriveHours}:#{genericFlight.arriveMinutes}</span>
-                                </p>
-                                <p>
-                                    <div class="options">
-                                        
-                                        <span class="id">#{genericFlight.genericFlightId}</span>
-                                        <span class="price">#{genericFlight.price}</span>
-                                        <h:commandButton action="#{flightBean.search(genericFlight.genericFlightId)}"
-                                                         value="Seleccionar"/>
-                                    </div>
-                                </p>
-                            </div>
-                        </div>
+                          <div class="flight">
+                              <h:graphicImage library="img" name="company/#{genericFlight.airline}.png"/>
+                              <div class="info">
+                                  <h2>#{genericFlight.airline}</h2>
+                                  <p>
+                                      <i class="fa fa-plane"></i> De <strong>#{genericFlight.origin}</strong>
+                                      <br/>
+                                      <i class="fa fa-plane"></i> A <strong>#{genericFlight.destiny}</strong>
+                                  </p>
+                                  <p>
+                                      Horas disponibles:<br/>
+                                      <span>#{genericFlight.departureHours}:#{genericFlight.departureMinutes}</span>
+                                      <span>#{genericFlight.arriveHours}:#{genericFlight.arriveMinutes}</span>
+                                  </p>
+                              </div>
+                              <div class="options">
+                                  <span class="id">#{genericFlight.genericFlightId}</span>
+                                  <span class="price">#{genericFlight.price}</span>
+                                  <h:commandButton action="#{flightBean.search(genericFlight.genericFlightId)}"
+                                                   value="Seleccionar"/>
+                              </div>
+                          </div>
                         </h:form>
                     </c:forEach>
                 </div>

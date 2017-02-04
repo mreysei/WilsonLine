@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){
-    //$('.price').val($('#price').val());
-    //$('#price').mousemove(updatePrice);
-    //$('#price').bind('touchmove',updatePrice);
+    $('.price').val($('#price').val());
+    $('#price').mousemove(updatePrice);
+    $('#price').bind('touchmove',updatePrice);
     $('#language').on('click', function(){
         if ($(this).hasClass('active')){
             $(this).find('ul').slideUp(); 

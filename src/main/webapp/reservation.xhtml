@@ -14,7 +14,7 @@
                     <ul>
                         <li><a href="./index.xhtml">Descripción</a></li>
                         <li><a href="./genericFlight.xhtml">Vuelos genéricos</a></li>
-                        <li><a href="./flight.xhtml">Vuelo #{reservationsBean.genericFlightSelected.genericFlightId}</a></li>
+                        <li><a href="./flight.xhtml">Vuelo ##{reservationsBean.genericFlightSelected.genericFlightId}</a></li>
                         <li>Reserva</li>
                     </ul>
                 </div>
@@ -22,7 +22,6 @@
                 <h:form id="reservation">
                     <p>¡Ya estamos en el último paso!<br />Solo queda que confirmes tu pasaje :)</p>
                     <div class="labels">
-                        <label for="txtId">ID</label>
                         <label for="txtDate">Date</label>
                         <label for="txtPrice">Precio</label>
                         <label for="txtName">Nombre</label>
@@ -32,17 +31,16 @@
                         <label for="txtCreditCardNumber">Número de Tarjeta</label>
                     </div>
                     <div class="inputs">
-                        <h:inputText id="txtId" size="3" readonly="true" value="" />
                         <h:inputText id="txtDate" size="8" readonly="true" value="#{reservationsBean.date}" />
                         <h:inputText id="txtPrice" size="5" readonly="true" value="#{reservationsBean.price} €" />
                         <h:inputText id="txtName" value="#{userBean.name}" />
                         <h:inputText id="txtSurname" value="#{userBean.surname}" />
                         <h:inputText id="txtTelephone" value="#{userBean.telephone}" />
-                        <h:selectOneListbox id="txtCreditCardType" value="#{userBean.creditCardType}">
+                        <h:selectOneMenu id="txtCreditCardType" value="#{userBean.creditCardType}">
                             <f:selectItem itemValue="Visa" itemLabel="Visa"/>
                             <f:selectItem itemValue="Maestro" itemLabel="Maestro"/>
                             <f:selectItem itemValue="MasterCard" itemLabel="MasterCard"/>
-                        </h:selectOneListbox>
+                        </h:selectOneMenu>
                         <h:inputText id="txtCreditCardNumber" value="#{userBean.creditCardNumber}"/>
                     </div><br />
                     <h:commandButton action="#{userBean.commit(reservationsBean.flightNumber, reservationsBean.price)}"

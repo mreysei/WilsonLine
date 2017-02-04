@@ -4,15 +4,17 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, user-scalable=no" />
         <h:outputStylesheet library="css" name="style.css" />
         <h:outputStylesheet library="css" name="device.css" />
+        <h:outputStylesheet library="css" name="toastr.css" />
         <h:outputStylesheet library="css" name="font-awesome.css" />
-        <h:outputScript library="js" name="jquery.js" />
+        <h:outputScript library="js" name="toastr.js" />
         <h:outputScript library="js" name="script.js" />
         <link rel="shortcut icon" href="resources/img/favicon.png" />
         <title>WilsonLine ~ ¡Tu mejor buscador!</title>
@@ -37,33 +39,31 @@
             <div id="bg"></div>
             <div id="left">
                 <h1>Búsqueda</h1>
-                <h:form>
+                <h:form id="find">
                     <p>
                         <b>Precio máximo</b>
-                        <h:inputText size="4" class="price" value="#{genericFlightBean.price}"/>
-                        <!-- <input type="text" size="4" name="price" readonly="true" class="price" /><br /> --> <!-- get this value -->
-                        <!-- <input type="range" id="price" min="0" max="1500"
-                               value="#{genericFlightBean.price}" /> -->
+                            <h:inputText id="txtPrice" class="price" size="4" value="#{genericFlightBean.price}" /><br />
+                            <p:slider for="txtPrice" minValue="0" maxValue="500"  style="width: 100%;" />
+                            <!-- <h:inputText size="4" class="price" value="#{genericFlightBean.price}"/> -->
                     </p>
                     <p>
                         <b>Horas</b>
                         <div class="gray">
                             <label for="hourOut">Salida</label>
-                            <h:inputText id="hourOut" value="#{genericFlightBean.departureTime}"/>
-                            <h:inputText id="hourIn" value="#{genericFlightBean.arriveTime}"/>
+                            <h:inputText id="hourOut" class="hour" value="#{genericFlightBean.departureTime}"/>
+                            <h:inputText id="hourIn" class="hour" value="#{genericFlightBean.arriveTime}"/>
                             <label for="hourIn">Llegada</label>
                         </div>
                     </p>
                     <b>Compañías</b><br />
-                    <h:selectManyCheckbox value="#{genericFlightBean.airlines}">
+                    <h:selectManyCheckbox class="disabledTable" value="#{genericFlightBean.airlines}">
                         <c:forEach var="airline" items="#{genericFlightBean.getAllAirlines()}">
                             <f:selectItem itemValue="#{airline.name}"
                                           itemLabel="#{airline.name}"/>
                         </c:forEach>
                     </h:selectManyCheckbox>
                     
-                    <h:commandButton id="find" action="#{genericFlightBean.search()}"
-                                     value="Realizar búsqueda"/>
+                    <h:commandButton id="find" action="#{genericFlightBean.search()}" value="Realizar búsqueda"/>
                 </h:form>
             </div>
             <div id="right">

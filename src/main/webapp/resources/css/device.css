@@ -24,7 +24,7 @@ and open the template in the editor.
     }
 }
 @media screen and (max-width: 900px) {
-    #left button{
+    #left input[type="submit"]{
         float:none;
         margin:0;
     }
@@ -32,8 +32,8 @@ and open the template in the editor.
         display:flex;
         flex-wrap: wrap;
     }
-    .gray [for^="hour"],
-    .gray [id^="hour"]{
+    .gray [for],
+    .gray [id]{
         width:50%;
     }
     .gray [for$="Out"]{

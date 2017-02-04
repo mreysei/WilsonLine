@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package es.cifpcm.wilsonline.dao;
 
 import es.cifpcm.wilsonline.daoimpl.AirlineDao;
@@ -25,6 +30,9 @@ public class DaoFactory implements ConnectionProvider
     private static DaoFactory instance;
     private DataSource ds;
     
+    /**
+     * Constructor set as private to implement <i>singleton pattern</i>.
+     */
     private DaoFactory()
     {
         try
@@ -39,6 +47,10 @@ public class DaoFactory implements ConnectionProvider
         }
     }
     
+    /**
+     * Will return the current instance in memory of the factory due to singleton pattern.
+     * @return the instance of the current Factory.
+     */
     public static synchronized DaoFactory getInstance()
     {
         if(instance == null)
@@ -49,6 +61,10 @@ public class DaoFactory implements ConnectionProvider
         return instance;
     }
 
+    /**
+     * 
+     * @return the <i>datasource</i> connection.
+     */
     @Override
     public Connection getConnection()
     {
@@ -63,21 +79,37 @@ public class DaoFactory implements ConnectionProvider
         }
     }
     
+    /**
+     * 
+     * @return a <i>GenericDao</i>.
+     */
     public GenericDao getGenericFlightDao()
     {
         return new GenericFlightDao(instance);
     }
     
+    /**
+     * 
+     * @return a <i>GenericDao</i>.
+     */
     public GenericDao getFlightDao()
     {
         return new FlightDao(instance);
     }
     
+    /**
+     * 
+     * @return a <i>GenericDao</i>.
+     */
     public GenericDao getReservationsDao()
     {
         return new ReservationsDao(instance);
     }
     
+    /**
+     * 
+     * @return a <i>GenericDao</i>.
+     */
     public GenericDao getAirlineDao()
     {
         return new AirlineDao(instance);

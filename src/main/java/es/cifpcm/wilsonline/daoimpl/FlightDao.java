@@ -26,6 +26,11 @@ public class FlightDao extends BaseDao implements GenericDao<Flight>
         super(conn);
     }
 
+    /**
+     * 
+     * @param id the value of the element we are looking for.
+     * @return a <i>Flight</i> object.
+     */
     @Override
     public Flight select(Integer id)
     {
@@ -56,6 +61,11 @@ public class FlightDao extends BaseDao implements GenericDao<Flight>
         return null;
     }
 
+    /**
+     * 
+     * @param condition the condition of the query to filter in the database.
+     * @return a List of Flight objects.
+     */
     @Override
     public List<Flight> selectByCriteria(String condition)
     {
@@ -92,21 +102,38 @@ public class FlightDao extends BaseDao implements GenericDao<Flight>
         return null;
     }
 
+    /**
+     * 
+     * @return a List of Flight objects without condition.
+     */
     @Override
     public List<Flight> selectAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @param element the element we are going to insert in the database.
+     * @return a <i>boolean</i> that indicates if the operation went well or not.
+     */
     @Override
     public boolean insert(Flight element) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @return a <i>boolean</i> that indicates if the operation went well or not.
+     */
     @Override
     public boolean update() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @return a <i>boolean</i> that indicates if the operation went well or not.
+     */
     @Override
     public boolean delete() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

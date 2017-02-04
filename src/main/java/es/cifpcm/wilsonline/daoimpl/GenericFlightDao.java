@@ -26,6 +26,11 @@ public class GenericFlightDao extends BaseDao implements GenericDao<GenericFligh
         super(conn);
     }
 
+    /**
+     * 
+     * @param id the value of the element we are looking for.
+     * @return a <i>GenericFlight</i> object.
+     */
     @Override
     public GenericFlight select(Integer id)
     {
@@ -62,6 +67,11 @@ public class GenericFlightDao extends BaseDao implements GenericDao<GenericFligh
         return null;
     }
 
+    /**
+     * 
+     * @param condition the condition of the query to filter in the database.
+     * @return a List of GenericFlight objects.
+     */
     @Override
     public List<GenericFlight> selectByCriteria(String condition)
     {
@@ -104,21 +114,38 @@ public class GenericFlightDao extends BaseDao implements GenericDao<GenericFligh
         return null;
     }
 
+    /**
+     * 
+     * @return a List of GenericFlight objects without condition.
+     */
     @Override
     public List<GenericFlight> selectAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @param element the element we are going to insert in the database.
+     * @return a <i>boolean</i> that indicates if the operation went well or not.
+     */
     @Override
     public boolean insert(GenericFlight element) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @return a <i>boolean</i> that indicates if the operation went well or not.
+     */
     @Override
     public boolean update() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @return a <i>boolean</i> that indicates if the operation went well or not.
+     */
     @Override
     public boolean delete() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

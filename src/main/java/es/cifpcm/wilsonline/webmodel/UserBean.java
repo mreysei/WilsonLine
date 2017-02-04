@@ -51,6 +51,12 @@ public class UserBean extends User implements Serializable
         this.flightSelected = flightSelected;
     }    
     
+    /**
+     * 
+     * @param flightNumber the flight selected by the user.
+     * @param price the total price of the flight selected.
+     * @return 
+     */
     public String commit(String flightNumber, Double price)
     {
         try
@@ -82,6 +88,10 @@ public class UserBean extends User implements Serializable
         return "t_error.xhtml?faces-redirect=true";
     }
     
+    /**
+     * 
+     * @return a <i>boolean<i> that indicates if the data was correct or not.
+     */
     private boolean validate()
     {
         if(this.getName() != null && this.getSurname() != null
@@ -96,6 +106,10 @@ public class UserBean extends User implements Serializable
         return false;
     }
     
+    /**
+     * 
+     * @return a <i>boolean<i> that indicates if the data was correct or not.
+     */
     private boolean validateNumericProperties()
     {
         try

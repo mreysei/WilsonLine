@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package es.cifpcm.wilsonline.daoimpl;
 
 import es.cifpcm.wilsonline.abstraction.BaseDao;
@@ -26,16 +31,30 @@ public class AirlineDao extends BaseDao implements GenericDao<Airline>
         super(conn);
     }
 
+    /**
+     * 
+     * @param id the value of the element we are looking for.
+     * @return an <i>Airline</i> object.
+     */
     @Override
     public Airline select(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @param condition the condition of the query to filter in the database.
+     * @return a List of Airline objects.
+     */
     @Override
     public List<Airline> selectByCriteria(String condition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @return a List of Airline objects without condition.
+     */
     @Override
     public List<Airline> selectAll()
     {
@@ -66,16 +85,29 @@ public class AirlineDao extends BaseDao implements GenericDao<Airline>
         return null;
     }
 
+    /**
+     * 
+     * @param element the element we are going to insert in the database.
+     * @return a <i>boolean</i> that indicates if the operation went well or not.
+     */
     @Override
     public boolean insert(Airline element) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @return a <i>boolean</i> that indicates if the operation went well or not.
+     */
     @Override
     public boolean update() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @return a <i>boolean</i> that indicates if the operation went well or not.
+     */
     @Override
     public boolean delete() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

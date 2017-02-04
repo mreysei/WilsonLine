@@ -86,5 +86,4 @@ public class User {
     public void setFlightNumber(Integer flightNumber) {
         this.flightNumber = flightNumber;
     }
-    
 }

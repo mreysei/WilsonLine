@@ -65,6 +65,10 @@ public class GenericFlightBean extends GenericFlight implements Serializable
         this.departureTime = departureTime;
     }
     
+    /**
+     * 
+     * @return the redirection webpage.
+     */
     public String search()
     {
         if(validate())
@@ -115,6 +119,10 @@ public class GenericFlightBean extends GenericFlight implements Serializable
         return "t_error.xhtml?faces-redirect=true";
     }
     
+    /**
+     * 
+     * @return a <i>boolean<i> that indicates if the data was correct or not.
+     */
     private boolean validate()
     {
         this.timeSelected = false;
@@ -136,6 +144,11 @@ public class GenericFlightBean extends GenericFlight implements Serializable
         return true;
     }
     
+    /**
+     * 
+     * @param timeSelected the time selected by the user (departureTime)
+     * @return a <i>boolean</i> that indicates if the data was correct or not.
+     */
     private boolean validateDepartureTime(String timeSelected)
     {
         String[] time = timeSelected.split(":");
@@ -157,7 +170,12 @@ public class GenericFlightBean extends GenericFlight implements Serializable
         
         return false;
     }
-    
+
+    /**
+     * 
+     * @param timeSelected the time selected by the user (arriveTime)
+     * @return a <i>boolean</i> that indicates if the data was correct or not.
+     */
     private boolean validateArriveTime(String timeSelected)
     {
         String[] time = timeSelected.split(":");
@@ -180,6 +198,10 @@ public class GenericFlightBean extends GenericFlight implements Serializable
         return false;
     }
     
+    /**
+     * 
+     * @return all the airlines.
+     */
     public List<Airline> getAllAirlines()
     {
         GenericDao dao = DaoFactory.getInstance().getAirlineDao();

@@ -59,6 +59,4 @@ public class Flight {
     public void setAirlineCode(String airlineCode) {
         this.airlineCode = airlineCode;
     }
-    
-    
 }

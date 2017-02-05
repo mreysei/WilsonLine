@@ -119,8 +119,44 @@ public class GenericFlightDao extends BaseDao implements GenericDao<GenericFligh
      * @return a List of GenericFlight objects without condition.
      */
     @Override
-    public List<GenericFlight> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<GenericFlight> selectAll()
+    {
+        String text = "select origin, destiny, generic_flight_id, arrive_hour," +
+                        " arrive_minutes, departure_hour, departure_minutes, price, airline" +
+                        " from v_generic_flight";
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text);
+                ResultSet results = query.executeQuery())
+        {
+            List<GenericFlight> genericFlights = new ArrayList<>();
+            GenericFlight genericFlight;
+            
+            while(results.next())
+            {
+                genericFlight = new GenericFlight();
+                
+                genericFlight.setDestiny(results.getString("destiny"));
+                genericFlight.setOrigin(results.getString("origin"));
+                genericFlight.setGenericFlightId(results.getString("generic_flight_id"));
+                genericFlight.setArriveHours(results.getInt("arrive_hour"));
+                genericFlight.setArriveMinutes(results.getInt("arrive_minutes"));
+                genericFlight.setDepartureHours(results.getInt("departure_hour"));
+                genericFlight.setDepartureMinutes(results.getInt("departure_minutes"));
+                genericFlight.setPrice(results.getDouble("price"));
+                genericFlight.setAirline(results.getString("airline"));
+                
+                genericFlights.add(genericFlight);
+            }
+            
+            return genericFlights;
+            
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return null;
     }
 
     /**
@@ -129,25 +165,89 @@ public class GenericFlightDao extends BaseDao implements GenericDao<GenericFligh
      * @return a <i>boolean</i> that indicates if the operation went well or not.
      */
     @Override
-    public boolean insert(GenericFlight element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean insert(GenericFlight element)
+    {
+        String text = "insert into genericFlight(departure_time, arrive_time," +
+                        " price, capacity, generic_flight_id, airline_code, origin," +
+                        " destiny) values(?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text))
+        {
+            String departureTime = element.getDepartureHours().toString() + ":" +
+                                    element.getDepartureMinutes().toString();
+            
+            String arriveTime = element.getArriveHours().toString() + ":" +
+                                    element.getArriveMinutes();
+            
+            query.setString(1, departureTime);
+            query.setString(2, arriveTime);
+            query.setDouble(3, element.getPrice());
+            //query.setInt(4, element.getCapacity());
+            query.setString(5, element.getGenericFlightId());
+            //query.setString(6, element.getAirlineCode());
+            query.setString(7, element.getOrigin());
+            query.setString(8, element.getDestiny());
+            
+            if(query.executeUpdate() > 0)
+            {
+                return true;
+            }
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return false;
     }
 
     /**
      * 
+     * @param condition the condition of the query to filter in the database.
      * @return a <i>boolean</i> that indicates if the operation went well or not.
      */
     @Override
-    public boolean update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(String condition)
+    {
+        String text = "update genericFlight" + condition;
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text))
+        {
+            if(query.executeUpdate() > 0)
+            {
+                return true;
+            }
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return false;
     }
 
     /**
      * 
+     * @param condition the condition of the query to filter in the database.
      * @return a <i>boolean</i> that indicates if the operation went well or not.
      */
     @Override
-    public boolean delete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(String condition)
+    {
+        String text = "delete from genericFlight" + condition;
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text))
+        {
+            if(query.executeUpdate() > 0)
+            {
+                return true;
+            }
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return false;
     }
 }

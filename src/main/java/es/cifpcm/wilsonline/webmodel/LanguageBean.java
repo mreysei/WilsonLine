@@ -36,13 +36,17 @@ public class LanguageBean implements Serializable {
         return locale;
     }
 
+    /**
+     * Set the language of the website for another.
+     * @param language the language selected.
+     */
     public void setLanguage(String language) {
         locale = new Locale(language);
         FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
         
         String bn = "lang";
-        String lang = locale.getLanguage().toString();
-        if (lang != "es"){
+        String lang = locale.getLanguage();
+        if (!lang.equals("es")){
             bn += "_" + lang;
         }
         basename = bn;
@@ -51,5 +55,4 @@ public class LanguageBean implements Serializable {
     public String getBasename() {
         return basename;
     }
-    
 }

@@ -6,7 +6,9 @@ import es.cifpcm.wilsonline.interfaces.GenericDao;
 import es.cifpcm.wilsonline.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +32,37 @@ public class ReservationsDao extends BaseDao implements GenericDao<User>
      * @return a <i>User</i> object.
      */    
     @Override
-    public User select(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User select(Integer id)
+    {
+        String text = "select reservation_number, name, surname, telephone," +
+                        " credit_card_type, credit_card_number, total_price," +
+                        " flight_flight_number from reservations" + id;
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text);
+                ResultSet results = query.executeQuery())
+        {
+            User user = new User();
+            
+            results.next();
+            
+            user.setReservationNumber(results.getInt("reservation_number"));
+            user.setName(results.getString("name"));
+            user.setSurname(results.getString("surname"));
+            user.setTelephone(results.getString("telephone"));
+            user.setCreditCardType(results.getString("credit_card_type"));
+            user.setCreditCardNumber(results.getString("credit_card_number"));
+            user.setTotalPrice(results.getDouble("total_price"));
+            user.setFlightNumber(results.getInt("flight_flight_number"));
+            
+            return user;
+            
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return null;
     }
 
     /**
@@ -40,8 +71,44 @@ public class ReservationsDao extends BaseDao implements GenericDao<User>
      * @return a List of User objects.
      */
     @Override
-    public List<User> selectByCriteria(String condition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<User> selectByCriteria(String condition)
+    {
+        String text = "select reservation_number, name, surname, telephone," +
+                        " credit_card_type, credit_card_number, total_price," +
+                        " flight_flight_number from reservations" +
+                        condition;
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text);
+                ResultSet results = query.executeQuery())
+        {
+            List<User> users = new ArrayList<>();
+            User user;
+            
+            while(results.next())
+            {
+                user = new User();
+                
+                user.setReservationNumber(results.getInt("reservation_number"));
+                user.setName(results.getString("name"));
+                user.setSurname(results.getString("surname"));
+                user.setTelephone(results.getString("telephone"));
+                user.setCreditCardType(results.getString("credit_card_type"));
+                user.setCreditCardNumber(results.getString("credit_card_number"));
+                user.setTotalPrice(results.getDouble("total_price"));
+                user.setFlightNumber(results.getInt("flight_flight_number"));
+                
+                users.add(user);
+            }
+            
+            return users;
+            
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return null;
     }
 
     /**
@@ -49,8 +116,43 @@ public class ReservationsDao extends BaseDao implements GenericDao<User>
      * @return a List of User objects without condition.
      */
     @Override
-    public List<User> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<User> selectAll()
+    {
+        String text = "select reservation_number, name, surname, telephone," +
+                        " credit_card_type, credit_card_number, total_price," +
+                        " flight_flight_number from reservations";
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text);
+                ResultSet results = query.executeQuery())
+        {
+            List<User> users = new ArrayList<>();
+            User user;
+            
+            while(results.next())
+            {
+                user = new User();
+                
+                user.setReservationNumber(results.getInt("reservation_number"));
+                user.setName(results.getString("name"));
+                user.setSurname(results.getString("surname"));
+                user.setTelephone(results.getString("telephone"));
+                user.setCreditCardType(results.getString("credit_card_type"));
+                user.setCreditCardNumber(results.getString("credit_card_number"));
+                user.setTotalPrice(results.getDouble("total_price"));
+                user.setFlightNumber(results.getInt("flight_flight_number"));
+                
+                users.add(user);
+            }
+            
+            return users;
+            
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return null;
     }
 
     /**
@@ -90,19 +192,51 @@ public class ReservationsDao extends BaseDao implements GenericDao<User>
     
     /**
      * 
+     * @param condition the condition of the query to filter in the database.
      * @return a <i>boolean</i> that indicates if the operation went well or not.
      */
     @Override
-    public boolean update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(String condition)
+    {
+        String text = "update reservations" + condition;
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text))
+        {
+            if(query.executeUpdate() > 0)
+            {
+                return true;
+            }
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return false;
     }
 
     /**
      * 
+     * @param condition the condition of the query to filter in the database.
      * @return a <i>boolean</i> that indicates if the operation went well or not.
      */
     @Override
-    public boolean delete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(String condition)
+    {
+        String text = "delete from reservations" + condition;
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text))
+        {
+            if(query.executeUpdate() > 0)
+            {
+                return true;
+            }
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return false;
     }
 }

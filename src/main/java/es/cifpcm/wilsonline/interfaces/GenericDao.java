@@ -13,6 +13,6 @@ public interface GenericDao <E>
     public List<E> selectByCriteria(String condition);
     public List<E> selectAll();
     public boolean insert(E element);
-    public boolean update();
-    public boolean delete();
+    public boolean update(String condition);
+    public boolean delete(String condition);
 }

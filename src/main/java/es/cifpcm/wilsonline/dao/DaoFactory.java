@@ -41,6 +41,8 @@ public class DaoFactory implements ConnectionProvider
             
             //We cast the jdbc resource name into a DataSource datatype.
             this.ds = (DataSource) ctx.lookup("jdbc/flight_reservations");
+            
+            LOG.debug("Asking server for Datasource...");
         } catch(NamingException ex)
         {
             LOG.error(ex.getMessage());

@@ -107,8 +107,38 @@ public class FlightDao extends BaseDao implements GenericDao<Flight>
      * @return a List of Flight objects without condition.
      */
     @Override
-    public List<Flight> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Flight> selectAll()
+    {
+        String text = "select flight_number, date, free_seatings, genericFlight_generic_flight_id" +
+                        " from v_flight";
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text);
+                ResultSet results = query.executeQuery())
+        {
+            List<Flight> flights = new ArrayList<>();
+            Flight flight;
+            
+            while(results.next())
+            {
+                flight = new Flight();
+                
+                flight.setFlightNumber(results.getInt("flight_number"));
+                flight.setDate(results.getString("date"));
+                flight.setFreeSeatings(results.getInt("free_seatings"));
+                flight.setGenericFlightId(results.getString("genericFlight_generic_flight_id"));
+                
+                flights.add(flight);
+            }
+            
+            return flights;
+            
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return null;
     }
 
     /**
@@ -117,25 +147,80 @@ public class FlightDao extends BaseDao implements GenericDao<Flight>
      * @return a <i>boolean</i> that indicates if the operation went well or not.
      */
     @Override
-    public boolean insert(Flight element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean insert(Flight element)
+    {
+        String text = "insert into flight(flight_number, date, free_seatings," +
+                        " genericFlight_generic_flight_id, airline_airline_code)" +
+                        " values(?, ?, ?, ?, ?)";
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text))
+        {
+            query.setInt(1, element.getFlightNumber());
+            query.setString(2, element.getDate());
+            query.setInt(3, element.getFreeSeatings());
+            query.setString(4, element.getGenericFlightId());
+            query.setString(5, element.getAirlineCode());
+            
+            if(query.executeUpdate() > 0)
+            {
+                return true;
+            }
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return false;
     }
 
     /**
      * 
+     * @param condition the condition of the query to filter in the database.
      * @return a <i>boolean</i> that indicates if the operation went well or not.
      */
     @Override
-    public boolean update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(String condition)
+    {
+        String text = "update flight" + condition;
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text))
+        {
+            if(query.executeUpdate() > 0)
+            {
+                return true;
+            }
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return false;
     }
 
     /**
      * 
+     * @param condition the condition of the query to filter in the database.
      * @return a <i>boolean</i> that indicates if the operation went well or not.
      */
     @Override
-    public boolean delete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(String condition)
+    {
+        String text = "delete from flight" + condition;
+        
+        try(Connection conn = super.connProvider.getConnection();
+                PreparedStatement query = conn.prepareStatement(text))
+        {
+            if(query.executeUpdate() > 0)
+            {
+                return true;
+            }
+        } catch(SQLException ex)
+        {
+            LOG.error(ex.getMessage());
+        }
+        
+        return false;
     }
 }

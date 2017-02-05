@@ -30,8 +30,46 @@
                                   </p>
                                   <p>
                                       #{msg['generic.hours']}: <br/>
-                                      #{msg['generic.from']} <span>#{genericFlight.departureHours}:#{genericFlight.departureMinutes}</span>
-                                      #{msg['generic.to']} <span>#{genericFlight.arriveHours}:#{genericFlight.arriveMinutes}</span>
+                                      #{msg['generic.from']}
+                                      <span>
+                                          <c:choose>
+                                              <c:when test="#{genericFlight.departureHours.toString().length() > 1}">
+                                                  #{genericFlight.departureHours}
+                                              </c:when>
+                                              <c:otherwise>
+                                                  0#{genericFlight.departureHours}
+                                              </c:otherwise>
+                                          </c:choose>
+                                          :
+                                          <c:choose>
+                                              <c:when test="#{genericFlight.departureMinutes.toString().length() > 1}">
+                                                  #{genericFlight.departureMinutes}
+                                              </c:when>
+                                              <c:otherwise>
+                                                  #{genericFlight.departureMinutes}0
+                                              </c:otherwise>
+                                          </c:choose>
+                                      </span>
+                                      #{msg['generic.to']}
+                                      <span>
+                                      <c:choose>
+                                          <c:when test="#{genericFlight.arriveHours.toString().length() > 1}">
+                                              #{genericFlight.arriveHours}
+                                          </c:when>
+                                          <c:otherwise>
+                                              0#{genericFlight.arriveHours}
+                                          </c:otherwise>
+                                      </c:choose>
+                                      :
+                                      <c:choose>
+                                          <c:when test="#{genericFlight.arriveMinutes.toString().length() > 1}">
+                                            #{genericFlight.arriveMinutes}
+                                          </c:when>
+                                          <c:otherwise>
+                                            #{genericFlight.arriveMinutes}0
+                                          </c:otherwise>
+                                      </c:choose>
+                                      </span>
                                   </p>
                               </div>
                               <div class="options">

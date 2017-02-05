@@ -14,24 +14,24 @@
                 </f:metadata>
                 <div id="position">
                     <ul>
-                        <li><a href="./index.xhtml">Descripción</a></li>
-                        <li><a href="./genericFlight.xhtml">Vuelos genéricos</a></li>
-                        <li><a href="./flight.xhtml">Vuelo ##{userBean.genericFlightSelected.genericFlightId}</a></li>
-                        <li><a href="./reservation.xhtml">Reserva</a></li>
-                        <li>Confirmación</li>
+                        <li><a href="./index.xhtml">#{msg['index.title']}</a></li>
+                        <li><a href="./genericFlight.xhtml">#{msg['generic.title']}</a></li>
+                        <li><a href="./flight.xhtml">#{msg['flight.title']} ##{userBean.genericFlightSelected.genericFlightId}</a></li>
+                        <li><a href="./reservation.xhtml">#{msg['reservation.title']}</a></li>
+                        <li>#{msg['confirmation.title']}</li>
                     </ul>
                 </div>
-                <h1>Confirmación</h1>
+                <h1>#{msg['confirmation.title']}</h1>
                 <div id="confirmation">
-                    <h2 class="success"><i class="fa fa-check-circle"></i> Enhorabuena</h2>
+                    <h2 class="success"><i class="fa fa-check-circle"></i> #{msg['confirmation.subtitle']}</h2>
                     <p>
-                        La compañía <strong>#{userBean.genericFlightSelected.airline}</strong> le 
-                        informa que su vuelo número <strong>#{userBean.genericFlightSelected.genericFlightId}</strong> 
-                        con la fecha <strong>#{userBean.flightSelected.date}</strong>
-                        y destino <strong>#{userBean.genericFlightSelected.destiny}</strong> ha 
-                        sido confirmada.<br /><br />
-                        Puede recoger su billete en el aeropuerto.<br />
-                        Muchas gracias por comprar tu billete en <strong>WilsonLine</strong>
+                        #{msg['confirmation.text1']} <strong>#{userBean.genericFlightSelected.airline}</strong>
+                        #{msg['confirmation.text2']} <strong>#{userBean.genericFlightSelected.genericFlightId}</strong> 
+                        #{msg['confirmation.text3']} <strong>#{userBean.flightSelected.date}</strong>
+                        #{msg['confirmation.text4']} <strong>#{userBean.genericFlightSelected.destiny}</strong> 
+                        #{msg['confirmation.text5']}<br /><br />
+                        #{msg['confirmation.text6']}<br />
+                        #{msg['confirmation.text7']} <strong>#{msg['name']}</strong>
                     </p>
                 </div>
             </ui:define>

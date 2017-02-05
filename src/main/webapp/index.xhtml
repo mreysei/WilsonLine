@@ -8,29 +8,24 @@
         <ui:composition template="./template/original.xhtml">
 
             <ui:define name="content">
-                <h1>Descripción</h1>
+                <h1>#{msg['index.title']}</h1>
                 <p>
-                    <i>¿Quiéres ver mundo? ¿viajar? ¿ver espectaculares paisajes?
-                    ¿visitar a tu familia lejana? ¿descansar de la rutina?</i>
+                    <i>#{msg['index.questions']}</i>
                 </p>
                 <p>
-                    Pues realmente estás tardando en realizar tu compra en el 
-                    mejor buscador de vuelos... <strong>¡WilsonLine!</strong>
-                    donde encontrarás las mejores ofertas que hay.
+                    #{msg['index.paragraph1']}... <strong>¡#{msg['name']}!</strong>
+                    #{msg['index.paragraph2']}
                 </p>
                 <p>
-                    <i class="fa fa-search"></i> <strong>Busqueda: </strong> 
-                    Realiza una busqueda con tus preferencias y encuentra las 
-                    mejores ofertas para irte de viaje con toda tu familia y amigos.
+                    <i class="fa fa-search"></i> <strong>#{msg['index.paragraph3.title']}: </strong> 
+                    #{msg['index.paragraph3']}
                 </p>
                 <p>
-                    <i class="fa fa-shopping-cart"></i> <strong>Reserva: </strong> 
-                    Una vez hayas elegido tu destino, fecha y precio, solo quedará 
-                    el último paso, pagar la reserva donde necesitaremos que 
-                    especifiques algunos de tus datos personales y los de pago. 
+                    <i class="fa fa-shopping-cart"></i> <strong>#{msg['index.paragraph4.title']}: </strong> 
+                    #{msg['index.paragraph4']}
                 </p>
                 <p>
-                    ¡Disfruta tu viaje con <strong>WilsonLine</strong>!
+                    ¡#{msg['index.final']} <strong>#{msg['name']}</strong>!
                 </p>
             </ui:define>
 

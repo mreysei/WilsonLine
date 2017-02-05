@@ -12,16 +12,16 @@
             <ui:define name="content">
                 <div id="position">
                     <ul>
-                        <li><a href="./index.xhtml">Descripción</a></li>
-                        <li><a href="./genericFlight.xhtml">Vuelos genéricos</a></li>
-                        <li>Vuelo ##{flightBean.genericFlightId}</li>
+                        <li><a href="./index.xhtml">#{msg['index.title']}</a></li>
+                        <li><a href="./genericFlight.xhtml">#{msg['generic.title']}</a></li>
+                        <li>#{msg['flight.title']} ##{flightBean.genericFlightId}</li>
                     </ul>
                 </div>
-                <h1>Vuelo ##{flightBean.genericFlightId}</h1>
+                <h1>#{msg['flight.title']} ##{flightBean.genericFlightId}</h1>
                 <table id="flight">
                     <tr>
-                        <th>Fecha</th>
-                        <th>Plazas Libres</th>
+                        <th>#{msg['flight.date']}</th>
+                        <th>#{msg['flight.freeseating']}</th>
                         <th></th>
                     </tr>
                     <!-- <c:forEach> -->
@@ -29,10 +29,10 @@
                         <tr>
                             <h:form>
                             <td>#{flight.date}</td>
-                            <td>#{flight.freeSeatings} Pl.</td>
+                            <td>#{flight.freeSeatings} #{msg['flight.fs']}</td>
                             <td>
                                 <h:commandButton action="#{reservationsBean.makeReservation(flight.flightNumber)}"
-                                    value="Reservar vuelo"/>
+                                    value="#{msg['flight.button']}"/>
                             </td>
                             </h:form>
                         </tr>

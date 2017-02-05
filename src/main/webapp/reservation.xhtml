@@ -5,6 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <f:loadBundle basename="#{languageBean.basename}" var="msg"/>
     <body>
 
         <ui:composition template="./template/original.xhtml">
@@ -12,23 +13,23 @@
             <ui:define name="content">
                 <div id="position">
                     <ul>
-                        <li><a href="./index.xhtml">Descripción</a></li>
-                        <li><a href="./genericFlight.xhtml">Vuelos genéricos</a></li>
-                        <li><a href="./flight.xhtml">Vuelo ##{reservationsBean.genericFlightSelected.genericFlightId}</a></li>
-                        <li>Reserva</li>
+                        <li><a href="./index.xhtml">#{msg['index.title']}</a></li>
+                        <li><a href="./genericFlight.xhtml">#{msg['generic.title']}</a></li>
+                        <li><a href="./flight.xhtml">#{msg['flight.title']} ##{reservationsBean.genericFlightSelected.genericFlightId}</a></li>
+                        <li>#{msg['reservation.title']}</li>
                     </ul>
                 </div>
-                <h1>Reserva</h1>
+                <h1>#{msg['reservation.title']}</h1>
                 <h:form id="reservation">
-                    <p>¡Ya estamos en el último paso!<br />Solo queda que confirmes tu pasaje :)</p>
+                    <p>#{msg['reservation.description1']}<br />#{msg['reservation.description2']}</p>
                     <div class="labels">
-                        <label for="txtDate">Date</label>
-                        <label for="txtPrice">Precio</label>
-                        <label for="txtName">Nombre</label>
-                        <label for="txtSurname">Apellidos</label>
-                        <label for="txtTelephone">Teléfono</label>
-                        <label for="txtCreditCardType">Tipo de tarjeta</label>
-                        <label for="txtCreditCardNumber">Número de Tarjeta</label>
+                        <label for="txtDate">#{msg['reservation.label.date']}</label>
+                        <label for="txtPrice">#{msg['reservation.label.price']}</label>
+                        <label for="txtName">#{msg['reservation.label.name']}</label>
+                        <label for="txtSurname">#{msg['reservation.label.surname']}</label>
+                        <label for="txtTelephone">#{msg['reservation.label.telephone']}</label>
+                        <label for="txtCreditCardType">#{msg['reservation.label.creditCardType']}</label>
+                        <label for="txtCreditCardNumber">#{msg['reservation.label.creditCardNumber']}</label>
                     </div>
                     <div class="inputs">
                         <h:inputText id="txtDate" size="8" readonly="true" value="#{reservationsBean.date}" />
@@ -44,7 +45,7 @@
                         <h:inputText id="txtCreditCardNumber" value="#{userBean.creditCardNumber}"/>
                     </div><br />
                     <h:commandButton action="#{userBean.commit(reservationsBean.flightNumber, reservationsBean.price)}"
-                                     value="Confirmar reserva"/>
+                                     value="#{msg['reservation.button']}"/>
                 </h:form>
             </ui:define>
 

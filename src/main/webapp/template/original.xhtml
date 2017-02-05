@@ -6,7 +6,7 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-
+    <f:loadBundle basename="#{languageBean.basename}" var="msg"/>
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, user-scalable=no" />
@@ -17,7 +17,7 @@
         <h:outputScript library="js" name="toastr.js" />
         <h:outputScript library="js" name="script.js" />
         <link rel="shortcut icon" href="resources/img/favicon.png" />
-        <title>WilsonLine ~ ¡Tu mejor buscador!</title>
+        <title>#{msg['name']} ~ #{msg['head.title']}</title>
     </h:head>
 
     <h:body>
@@ -25,12 +25,14 @@
         <div id="header">
             <div class="container">
                 <div id="language">
-                    <h3><i class="fa fa-flag"></i></h3>
-                    <ul>
-                        <li><a href="#">Español</a></li>
-                        <li><a href="#">English</a></li>
-                        <li><a href="#">Català</a></li>
-                    </ul>
+                    <h:form>
+                        <h3><i class="fa fa-flag"></i></h3>
+                        <ul>
+                            <li><h:commandLink action="#{languageBean.setLanguage('es')}" value="Español" /></li>
+                            <li><h:commandLink action="#{languageBean.setLanguage('en')}" value="English" /></li>
+                            <li><h:commandLink action="#{languageBean.setLanguage('ca')}" value="Català" /></li>
+                        </ul>
+                    </h:form>
                 </div>
                 <h:graphicImage library="img" name="logo.png" />
             </div>
@@ -38,24 +40,24 @@
         <div id="container">
             <div id="bg"></div>
             <div id="left">
-                <h1>Búsqueda</h1>
+                <h1>#{msg['find.title']}</h1>
                 <h:form id="find">
                     <p>
-                        <b>Precio máximo</b>
+                        <b>#{msg['find.price']}</b>
                             <h:inputText id="txtPrice" class="price" size="4" value="#{genericFlightBean.price}" /><br />
                             <p:slider for="txtPrice" minValue="0" maxValue="500"  style="width: 100%;" />
                             <!-- <h:inputText size="4" class="price" value="#{genericFlightBean.price}"/> -->
                     </p>
                     <p>
-                        <b>Horas</b>
+                        <b>#{msg['find.hours']}</b>
                         <div class="gray">
-                            <label for="hourOut">Salida</label>
+                            <label for="hourOut">#{msg['find.hours.departure']}</label>
                             <h:inputText id="hourOut" class="hour" value="#{genericFlightBean.departureTime}"/>
                             <h:inputText id="hourIn" class="hour" value="#{genericFlightBean.arriveTime}"/>
-                            <label for="hourIn">Llegada</label>
+                            <label for="hourIn">#{msg['find.hours.arrive']}</label>
                         </div>
                     </p>
-                    <b>Compañías</b><br />
+                    <b>#{msg['find.company']}</b><br />
                     <h:selectManyCheckbox class="disabledTable" value="#{genericFlightBean.airlines}">
                         <c:forEach var="airline" items="#{genericFlightBean.getAllAirlines()}">
                             <f:selectItem itemValue="#{airline.name}"
@@ -63,7 +65,7 @@
                         </c:forEach>
                     </h:selectManyCheckbox>
                     
-                    <h:commandButton id="find" action="#{genericFlightBean.search()}" value="Realizar búsqueda"/>
+                    <h:commandButton id="find" action="#{genericFlightBean.search()}" value="#{msg['find.button']}"/>
                 </h:form>
             </div>
             <div id="right">
@@ -73,7 +75,7 @@
         <div id="footer">
             <div class="container">
                 <div class="members">
-                    <h1>Miembros</h1>
+                    <h1>#{msg['footer.members']}</h1>
                     <ul>
                         <li>Javier Gracia Gonzalez - <a href="https://twitter.com/javigracia" target="_blank">@javigracia</a></li>
                         <li>Cristina Peón Padilla - <a href="https://twitter.com/CristiDeveloper" target="_blank">@CristiDeveloper</a></li>
@@ -81,7 +83,7 @@
                     </ul>
                 </div>
                 <div class="links">
-                    <h1>Enlaces</h1>
+                    <h1>#{msg['footer.links']}</h1>
                     <ul>
                         <li><a href="http://github.com/mreysei/WilsonLine">Github</a></li>
                         <li><a href="https://trello.com/b/1HOBOqtP">Trello</a></li>

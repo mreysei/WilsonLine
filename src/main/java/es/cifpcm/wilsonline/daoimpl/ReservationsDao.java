@@ -23,22 +23,41 @@ public class ReservationsDao extends BaseDao implements GenericDao<User>
     {
         super(conn);
     }
-    
+
+    /**
+     * 
+     * @param id the value of the element we are looking for.
+     * @return a <i>User</i> object.
+     */    
     @Override
     public User select(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @param condition the condition of the query to filter in the database.
+     * @return a List of User objects.
+     */
     @Override
     public List<User> selectByCriteria(String condition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @return a List of User objects without condition.
+     */
     @Override
     public List<User> selectAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @param element the element we are going to insert in the database.
+     * @return a <i>boolean</i> that indicates if the operation went well or not.
+     */
     @Override
     public boolean insert(User element)
     {
@@ -53,7 +72,7 @@ public class ReservationsDao extends BaseDao implements GenericDao<User>
             query.setString(2, element.getSurname());
             query.setString(3, element.getTelephone());
             query.setString(4, element.getCreditCardType());
-            query.setInt(5, element.getCreditCardNumber());
+            query.setLong(5, Long.parseLong(element.getCreditCardNumber()));
             query.setDouble(6, element.getTotalPrice());
             query.setInt(7, element.getFlightNumber());
             
@@ -69,11 +88,19 @@ public class ReservationsDao extends BaseDao implements GenericDao<User>
         return false;
     }
     
+    /**
+     * 
+     * @return a <i>boolean</i> that indicates if the operation went well or not.
+     */
     @Override
     public boolean update() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @return a <i>boolean</i> that indicates if the operation went well or not.
+     */
     @Override
     public boolean delete() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

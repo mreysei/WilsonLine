@@ -8,6 +8,7 @@ import es.cifpcm.wilsonline.model.User;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.faces.context.FacesContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,6 +52,12 @@ public class UserBean extends User implements Serializable
         this.flightSelected = flightSelected;
     }    
     
+    /**
+     * 
+     * @param flightNumber the flight selected by the user.
+     * @param price the total price of the flight selected.
+     * @return 
+     */
     public String commit(String flightNumber, Double price)
     {
         try
@@ -79,9 +86,13 @@ public class UserBean extends User implements Serializable
             }
         }
         
-        return "t_error.xhtml?faces-redirect=true";
+        return "t_error2.xhtml?faces-redirect=true";
     }
     
+    /**
+     * 
+     * @return a <i>boolean<i> that indicates if the data was correct or not.
+     */
     private boolean validate()
     {
         if(this.getName() != null && this.getSurname() != null
@@ -96,11 +107,16 @@ public class UserBean extends User implements Serializable
         return false;
     }
     
+    /**
+     * 
+     * @return a <i>boolean<i> that indicates if the data was correct or not.
+     */
     private boolean validateNumericProperties()
     {
         try
         {
             Integer.parseInt(this.getTelephone());
+            Long.parseLong(this.getCreditCardNumber());
             return true;
             
         } catch(NumberFormatException ex)
@@ -109,5 +125,13 @@ public class UserBean extends User implements Serializable
         }
         
         return false;
+    }
+    
+    /**
+     * Destroy the sesion for this user after all reservation process has been completed.
+     */
+    public void destroySession()
+    {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
     }
 }

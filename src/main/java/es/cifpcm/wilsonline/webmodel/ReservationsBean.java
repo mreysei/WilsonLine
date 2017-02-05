@@ -17,6 +17,9 @@ import java.io.Serializable;
 @SessionScoped
 public class ReservationsBean extends Reservations implements Serializable
 {
+    /**
+     * The list of the generic flights we have selected to show up data from.
+     */
     private GenericFlight genericFlightSelected;
     
     /**
@@ -37,6 +40,11 @@ public class ReservationsBean extends Reservations implements Serializable
         this.genericFlightSelected = genericFlightSelected;
     }
     
+    /**
+     * 
+     * @param number the flight selected by the user.
+     * @return the redirection webpage.
+     */
     public String makeReservation(Integer number)
     {
         this.setFlightNumber(number);

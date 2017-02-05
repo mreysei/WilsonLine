@@ -17,10 +17,13 @@ import javax.enterprise.context.SessionScoped;
 @SessionScoped
 public class FlightBean extends Flight implements Serializable
 {
+    /**
+     * The list of flights we have selected to show up data from.
+     */
     private List<Flight> flights = new ArrayList<>();
     
     /**
-     * Creates a new instance of FlightBean
+     * Creates a new instance of FlightBean.
      */
     public FlightBean()
     {
@@ -37,6 +40,11 @@ public class FlightBean extends Flight implements Serializable
         this.flights = flights;
     }
     
+    /**
+     * 
+     * @param id the element which we are looking data from.
+     * @return the redirection webpage.
+     */
     public String search(String id)
     {
         this.setGenericFlightId(id);

@@ -41,5 +41,4 @@ public class Reservations {
     public void setPrice(Double price) {
         this.price = price;
     }
-    
 }

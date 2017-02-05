@@ -13,9 +13,16 @@ import es.cifpcm.wilsonline.interfaces.ConnectionProvider;
  */
 public abstract class BaseDao
 {
-    //We set this property only in one place, so all child classes could use it.
+    /**
+     * Protected property to provide all subclasses a connection method.
+     */
     protected final ConnectionProvider connProvider;
     
+    /**
+     * 
+     * @param conn
+     * Obtains a <i>ConnectionProvider</i>.
+     */
     public BaseDao(ConnectionProvider conn)
     {
         this.connProvider = conn;

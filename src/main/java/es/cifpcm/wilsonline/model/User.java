@@ -15,7 +15,7 @@ public class User {
     private String surname;
     private String telephone;
     private String creditCardType;
-    private Integer creditCardNumber;
+    private String creditCardNumber;
     private Double totalPrice;
     private Integer flightNumber;
     
@@ -63,11 +63,11 @@ public class User {
         this.creditCardType = creditCardType;
     }
 
-    public Integer getCreditCardNumber() {
+    public String getCreditCardNumber() {
         return creditCardNumber;
     }
 
-    public void setCreditCardNumber(Integer creditCardNumber) {
+    public void setCreditCardNumber(String creditCardNumber) {
         this.creditCardNumber = creditCardNumber;
     }
 
@@ -86,5 +86,4 @@ public class User {
     public void setFlightNumber(Integer flightNumber) {
         this.flightNumber = flightNumber;
     }
-    
 }
